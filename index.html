@@ -81,7 +81,7 @@ tr:hover td{background:#F5F9FF}
 <nav id="bn"></nav></div>
 <script type="module">
 // KONFIGURASI APLIKASI
-const IS_PREVIEW = false; // Ubah menjadi false SAAT DEPLOY / PUBLISH agar terhubung murni ke Firebase tanpa data dummy
+const IS_PREVIEW = true; // Ubah menjadi false SAAT DEPLOY / PUBLISH agar terhubung murni ke Firebase tanpa data dummy
 
 // PASTE FIREBASE CONFIG ANDA DI SINI
 const firebaseConfig = {
@@ -116,11 +116,17 @@ const modal=(h,w)=>{X();const e=document.createElement('div');e.className='mo';e
 // Dialog konfirmasi buatan sendiri (confirm() bawaan browser diblokir di dalam iframe/embed)
 const info=(t,m)=>modal(`<h3>${H(t)}</h3><p style="margin:10px 0">${m}</p><div class="row"><button class="btn p w" onclick="A.X()">Mengerti</button></div>`);
 const ask=(t,m,ok,fn,extra='')=>{modal(`<h3>${H(t)}</h3><p style="margin:10px 0">${m}</p>${extra}<div class="row" style="margin-top:16px"><button class="btn" onclick="A.X()">Batal</button><button class="btn p dg" id="cfy">${H(ok)}</button></div>`);
+ const gt=$('#gt');if(gt){$('#cfy').disabled=true;gt.oninput=()=>{$('#cfy').disabled=gt.value.trim().toUpperCase()!='HAPUS'}}
  $('#cfy').onclick=async()=>{const b=$('#cfy');b.disabled=true;b.textContent='Memproses…';try{await fn();X();toast('Berhasil')}catch(e){X();toast('Gagal: '+(e?.code==='permission-denied'?'ditolak oleh aturan database':'periksa koneksi lalu coba lagi'))}}};
 const sel=(o,v)=>o.map(([a,b])=>`<option value="${H(a)}" ${a==v?'selected':''}>${H(b)}</option>`).join('');
 const inp=(p,[k,l,t,o],v)=>`<label>${l}</label>`+(t=='select'?`<select id="${p}${k}">${sel(o(),v)}</select>`:`<input id="${p}${k}" type="${t||'text'}" value="${H(v??'')}">`);
 const tbl=(h,rows)=>`<div class="tw"><table><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')||`<tr><td colspan="${h.length}" class="empty">Belum ada data</td></tr>`}</tbody></table></div>`;
 const byN=(a,b)=>String(a.nama).localeCompare(String(b.nama));
+const sLbl=s=>s.aktif!==false?'Aktif':s.status=='lulus'?'Lulus':'Nonaktif';
+const norm=s=>String(s||'').trim().replace(/\s+/g,' ').toLowerCase();
+// Hapus semua riwayat absensi milik sekumpulan siswa (10 siswa per gelombang)
+const delAbs=async ids=>{for(let i=0;i<ids.length;i+=10){const gs=await Promise.all(ids.slice(i,i+10).map(id=>DB.q('absensi',[['siswaId','==',id]])));const all=gs.flat().map(x=>x.id);if(all.length)await DB.delMany('absensi',all)}};
+let fs='',PLAN=[],pmS='';
 
 let DB,me=null,S={settings:[],users:[],siswa:[],kelas:[],absensi:[]},LD=new Set(),page='',unsubs=[],abU=null,camera=null,camList=[],camIdx=-1,curDay=today(),rt,fk='',aq='',ak='',last={c:'',t:0},RK=null,rkAuto=false,fails=0,lockUntil=0;
 const ready=()=>['settings','siswa','kelas'].every(x=>LD.has(x));
@@ -276,7 +282,7 @@ A.sc=async code=>{code=String(code).trim();if(!code||(last.c==code&&Date.now()-l
 const CR={
  siswa:{f:[['nisn','NISN'],['nama','Nama lengkap'],['kodeQr','Kode QR (kosong = NISN)'],['kelasId','Kelas','select',kOpts],['jk','Jenis kelamin','select',()=>[['L','Laki-laki'],['P','Perempuan']]],['aktif','Status','select',()=>[['1','Aktif'],['0','Nonaktif']]]],
   pre:r=>({...r,aktif:r.aktif===false?'0':'1'}),
-  save:async(v,r)=>{if(!okId(v.nisn)||!v.nama)throw'NISN (huruf/angka) dan nama wajib diisi';if(v.kodeQr&&!okId(v.kodeQr))throw'Kode QR hanya boleh huruf/angka';await DB.set('siswa',r?.id||v.nisn,{nisn:v.nisn,nama:v.nama,kelasId:v.kelasId,jk:v.jk,kodeQr:v.kodeQr||v.nisn,aktif:v.aktif=='1'})}},
+  save:async(v,r)=>{if(!okId(v.nisn)||!v.nama)throw'NISN (huruf/angka) dan nama wajib diisi';if(v.kodeQr&&!okId(v.kodeQr))throw'Kode QR hanya boleh huruf/angka';await DB.set('siswa',r?.id||v.nisn,{nisn:v.nisn,nama:v.nama,kelasId:v.kelasId,jk:v.jk,kodeQr:v.kodeQr||v.nisn,aktif:v.aktif=='1',...(v.aktif=='1'?{status:''}:{})})}},
  users:{f:[['username','NIP'],['nama','Nama lengkap'],['role','Peran','select',()=>[['piket','Guru Piket'],['walikelas','Wali Kelas']]],['password','Password (kosong = tidak diubah)','password'],['aktif','Status','select',()=>[['1','Aktif'],['0','Nonaktif']]]],
   pre:r=>({...r,aktif:r.aktif===false?'0':'1',password:''}),
   save:async(v,r)=>{const id=r?.id||v.username;if(!okId(id))throw'NIP hanya boleh huruf, angka, - dan _';if(!v.nama)throw'Nama wajib diisi';
@@ -293,7 +299,7 @@ const form=(c,id)=>{const C=CR[c],r=id?S[c].find(x=>x.id==id):null,v=C.pre(r||{}
 A.ad=c=>form(c);A.ed=(c,id)=>form(c,id);
 A.del=(c,id)=>{const r=S[c].find(x=>x.id==id);if(!r)return toast('Data tidak ditemukan');
  if(c=='kelas'){const n=S.siswa.filter(s=>s.kelasId==id).length;
-  if(n)return info('Kelas tidak bisa dihapus',`Kelas <b>${H(r.nama)}</b> masih memiliki ${n} siswa. Pindahkan atau hapus siswanya lebih dulu.`);
+  if(n)return info('Kelas tidak bisa dihapus',`Kelas <b>${H(r.nama)}</b> masih memiliki ${n} siswa (termasuk nonaktif/lulus). Pindahkan siswanya, atau gunakan tombol "Hapus siswa" pada kelas ini lebih dulu.`);
   return ask('Hapus kelas?',`Kelas <b>${H(r.nama)}</b> akan dihapus permanen.`,'Hapus',()=>DB.del('kelas',id))}
  if(c=='siswa')return ask('Hapus siswa?',`<b>${H(r.nama)}</b> (NISN ${H(r.nisn)}) akan dihapus permanen.`,'Hapus',async()=>{
   if($('#dh')?.checked){const L=await DB.q('absensi',[['siswaId','==',id]]);if(L.length)await DB.delMany('absensi',L.map(x=>x.id))}
@@ -301,14 +307,61 @@ A.del=(c,id)=>{const r=S[c].find(x=>x.id==id);if(!r)return toast('Data tidak dit
  if(c=='users')return ask('Hapus guru?',`Akun <b>${H(r.nama)}</b> (NIP ${H(r.username||r.id)}) akan dihapus dan tidak bisa login lagi.`,'Hapus',async()=>{
   const L=S.kelas.filter(k=>k.waliKelasId==id);if(L.length)await DB.batch(L.map(k=>['kelas',k.id,{waliKelasId:''}]));await DB.del('users',id)})};
 const act=(c,id)=>`<button class="btn s" onclick="A.ed('${c}','${id}')">Ubah</button> <button class="btn s d" onclick="A.del('${c}','${id}')">Hapus</button>`;
-A.fk=v=>{fk=v;draw()};
+A.fk=v=>{fk=v;draw()};A.fs=v=>{fs=v;draw()};
+const isLulus=s=>s.status=='lulus'&&s.aktif===false;
+
+// ===== Hapus semua siswa dalam satu kelas =====
+A.dk=kid=>{if(me.role!='admin')return;const k=S.kelas.find(x=>x.id==kid);if(!k)return toast('Kelas tidak ditemukan');
+ const L=S.siswa.filter(s=>s.kelasId==kid);if(!L.length)return info('Tidak ada siswa',`Kelas <b>${H(k.nama)}</b> belum memiliki siswa.`);
+ ask('Hapus semua siswa kelas ini?',`Sebanyak <b>${L.length} siswa</b> di kelas <b>${H(k.nama)}</b> (termasuk yang nonaktif/lulus) akan dihapus permanen. Tindakan ini tidak bisa dibatalkan.`,'Hapus semua',async()=>{
+  const dh=$('#dh')?.checked,dkl=$('#dkl')?.checked,ids=L.map(s=>s.id);
+  if(dh)await delAbs(ids);
+  await DB.delMany('siswa',ids);ids.forEach(i=>ms.delete(i));
+  if(dkl){await DB.del('kelas',kid);if(fk==kid)fk='';if(mk==kid)mk='';if(ak==kid)ak=''}
+ },`<label style="display:flex;gap:8px;align-items:center;margin-top:8px"><input type="checkbox" id="dh" checked style="width:auto"> Hapus juga riwayat absensi siswa-siswa ini</label><label style="display:flex;gap:8px;align-items:center;margin-top:8px"><input type="checkbox" id="dkl" style="width:auto"> Hapus juga kelasnya</label><label>Ketik <b>HAPUS</b> untuk melanjutkan</label><input id="gt" autocomplete="off" placeholder="HAPUS">`)};
+
+// ===== Kenaikan kelas =====
+const lvl=n=>{const m=String(n||'').trim().match(/^(XII|XI|X)(?=\s|$)(.*)$/i);return m?{t:m[1].toUpperCase(),rest:m[2].trim()}:null};
+const NX={X:'XI',XI:'XII',XII:null};
+function buildPlan(scope){const ks=S.kelas.filter(k=>!scope||k.id==scope).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true})),nw={},rows=[];
+ ks.forEach(k=>{const ss=S.siswa.filter(s=>s.kelasId==k.id&&s.aktif!==false),l=lvl(k.nama);
+  if(!l)return rows.push({k,ss,skip:'Nama kelas tidak diawali X / XI / XII, tidak bisa dipindah otomatis'});
+  if(!NX[l.t])return rows.push({k,ss,grad:true});
+  const nt=NX[l.t],nn=nt+(l.rest?' '+l.rest:'');let tg=S.kelas.find(x=>norm(x.nama)==norm(nn));
+  if(!tg){tg=nw[norm(nn)];if(!tg){tg=nw[norm(nn)]={id:'k'+Date.now().toString(36)+Object.keys(nw).length,nama:nn,tingkat:nt,isNew:true}}}
+  rows.push({k,ss,tg,nn,exist:tg.isNew?0:S.siswa.filter(s=>s.kelasId==tg.id&&s.aktif!==false).length})});
+ return rows}
+A.nk=scope=>{if(me.role!='admin')return;scope=scope||'';pmS=scope;PLAN=buildPlan(scope);if(!PLAN.length)return info('Belum ada kelas','Tambahkan kelas terlebih dahulu.');
+ const mv=PLAN.filter(r=>!r.skip),tot=mv.reduce((a,r)=>a+r.ss.length,0),gr=PLAN.filter(r=>r.grad).reduce((a,r)=>a+r.ss.length,0),sk=PLAN.filter(r=>r.skip).length,off=S.siswa.filter(s=>s.aktif===false&&!isLulus(s)&&PLAN.some(r=>r.k.id==s.kelasId)).length;
+ if(!mv.length)return info('Tidak ada yang bisa dipindah','Nama kelas harus diawali X, XI, atau XII (contoh: X TKJ 1) agar bisa dinaikkan otomatis.');
+ modal(`<h3>Kenaikan kelas</h3><p style="color:var(--m)">Cakupan: <b>${scope?H(PLAN[0].k.nama):'Semua kelas'}</b>. Hanya siswa berstatus aktif yang dipindah.</p>`+tbl(['Kelas asal','Tujuan','Siswa','Keterangan'],PLAN.map(r=>[H(r.k.nama),r.skip?'-':r.grad?'<b>Lulus</b>':'→ '+H(r.tg.nama),r.ss.length,r.skip?H(r.skip):r.grad?'Ditandai Lulus dan dinonaktifkan':r.tg.isNew?'Kelas baru dibuat (wali kelas kosong)':'Kelas sudah ada'+(r.exist?`, berisi ${r.exist} siswa`:'')]))
+  +`<p class="chip">${tot} siswa akan diproses${gr?` · ${gr} siswa kelas XII ditandai Lulus`:''}${sk?` · ${sk} kelas dilewati`:''}${off?` · ${off} siswa nonaktif tidak dipindah`:''}</p><small>Setelah proses selesai, Anda bisa membatalkannya lewat tombol "Batalkan kenaikan terakhir".</small><div class="row" style="margin-top:16px"><button class="btn" onclick="A.X()">Batal</button><button class="btn p" id="nkgo" ${tot?'':'disabled'} onclick="A.ng()">Naikkan ${tot} siswa</button></div>`,1)};
+A.ng=async()=>{const b=$('#nkgo');if(!b||!PLAN.length)return;b.disabled=true;b.textContent='Memproses…';
+ const id='n'+Date.now().toString(36),mv=PLAN.filter(r=>!r.skip),cr={},ops=[];let tot=0;
+ mv.forEach(r=>{if(r.tg&&r.tg.isNew)cr[r.tg.id]=r.tg;tot+=r.ss.length});
+ ops.push(['settings','school',{naikId:id,naikAt:today(),naikTahunLama:cfg().tahunAjaran,naikTahunBaru:'',naikKelas:Object.keys(cr).join(','),naikJml:tot}]);
+ Object.values(cr).forEach(t=>ops.push(['kelas',t.id,{nama:t.nama,tingkat:t.tingkat,waliKelasId:''}]));
+ mv.forEach(r=>r.ss.forEach(s=>ops.push(['siswa',s.id,r.grad?{aktif:false,status:'lulus',prevKelasId:r.k.id,naikBatch:id}:{kelasId:r.tg.id,prevKelasId:r.k.id,naikBatch:id}])));
+ try{await DB.batch(ops);X();fk='';toast(tot+' siswa berhasil diproses');if(!pmS)offerYear()}
+ catch{b.disabled=false;b.textContent='Coba lagi';toast('Gagal memproses kenaikan kelas. Periksa koneksi lalu coba lagi.')}};
+let pendTy='';
+function offerYear(){const m=String(cfg().tahunAjaran).match(/^(\d{4})\/(\d{4})$/);if(!m)return;pendTy=(+m[1]+1)+'/'+(+m[2]+1);
+ modal(`<h3>Perbarui tahun ajaran?</h3><p style="margin:10px 0">Tahun ajaran saat ini <b>${H(cfg().tahunAjaran)}</b>. Ubah menjadi <b>${H(pendTy)}</b>?</p><div class="row"><button class="btn" onclick="A.X()">Nanti</button><button class="btn p" onclick="A.ty()">Ya, perbarui</button></div>`)}
+A.ty=async()=>{try{await DB.set('settings','school',{tahunAjaran:pendTy,naikTahunBaru:pendTy});X();toast('Tahun ajaran diperbarui')}catch{toast('Gagal memperbarui tahun ajaran')}};
+A.nb=()=>{if(me.role!='admin')return;const id=cfg().naikId;if(!id)return info('Tidak ada yang bisa dibatalkan','Belum ada kenaikan kelas yang tercatat.');
+ const L=S.siswa.filter(s=>s.naikBatch==id);
+ ask('Batalkan kenaikan terakhir?',`Kenaikan kelas tanggal <b>${H(cfg().naikAt||'-')}</b> akan dibatalkan: <b>${L.length} siswa</b> dikembalikan ke kelas dan status sebelumnya, dan kelas yang dibuat otomatis (bila kosong) dihapus. Perubahan manual pada siswa-siswa itu setelah kenaikan juga ikut dikembalikan.`,'Batalkan kenaikan',async()=>{
+  const ops=L.map(s=>['siswa',s.id,{kelasId:s.prevKelasId||s.kelasId,aktif:true,status:'',naikBatch:'',prevKelasId:''}]),back=new Set(L.map(s=>s.id));
+  const del=String(cfg().naikKelas||'').split(',').filter(x=>x&&S.kelas.some(k=>k.id==x)&&!S.siswa.some(s=>s.kelasId==x&&!back.has(s.id)));
+  const o={naikId:'',naikKelas:'',naikJml:0};if(cfg().naikTahunBaru&&cfg().tahunAjaran==cfg().naikTahunBaru&&cfg().naikTahunLama){o.tahunAjaran=cfg().naikTahunLama;o.naikTahunBaru=''}
+  if(ops.length)await DB.batch(ops);if(del.length)await DB.delMany('kelas',del);await DB.set('settings','school',o);fk=''})};
 
 // ===== Excel siswa =====
 A.pick=()=>$('#fi').click();
-A.exm=()=>modal(`<h3>Export Excel</h3><label>Kelas</label><select id="ek"><option value="">Semua kelas</option>${sel(kOpts(),'')}</select><label>Status</label><select id="es">${sel([['','Semua'],['1','Aktif'],['0','Nonaktif']],'')}</select><div class="row" style="margin-top:16px"><button class="btn" onclick="A.X()">Batal</button><button class="btn p" onclick="A.ex()">Export</button></div>`);
-A.ex=()=>{const k=$('#ek').value,s=$('#es').value,L=S.siswa.filter(x=>(!k||x.kelasId==k)&&(!s||(x.aktif!==false)==(s=='1')));if(!L.length)return toast('Tidak ada data untuk diexport');
+A.exm=()=>modal(`<h3>Export Excel</h3><label>Kelas</label><select id="ek"><option value="">Semua kelas</option>${sel(kOpts(),'')}</select><label>Status</label><select id="es">${sel([['','Semua'],['1','Aktif'],['0','Nonaktif'],['lulus','Lulus']],'')}</select><div class="row" style="margin-top:16px"><button class="btn" onclick="A.X()">Batal</button><button class="btn p" onclick="A.ex()">Export</button></div>`);
+A.ex=()=>{const k=$('#ek').value,s=$('#es').value,L=S.siswa.filter(x=>(!k||x.kelasId==k)&&(!s||(s=='lulus'?isLulus(x):s=='1'?x.aktif!==false:x.aktif===false&&!isLulus(x))));if(!L.length)return toast('Tidak ada data untuk diexport');
  const nm=id=>S.kelas.find(x=>x.id==id)?.nama||'-';
- const ws=XLSX.utils.aoa_to_sheet([['No','NISN','Kode QR','Nama','Jenis Kelamin','Kelas','Status'],...L.map((x,i)=>[i+1,String(x.nisn),String(x.kodeQr||x.nisn),x.nama,x.jk=='P'?'Perempuan':'Laki-laki',nm(x.kelasId),x.aktif===false?'Nonaktif':'Aktif'])]);
+ const ws=XLSX.utils.aoa_to_sheet([['No','NISN','Kode QR','Nama','Jenis Kelamin','Kelas','Status'],...L.map((x,i)=>[i+1,String(x.nisn),String(x.kodeQr||x.nisn),x.nama,x.jk=='P'?'Perempuan':'Laki-laki',nm(x.kelasId),sLbl(x)])]);
  ws['!cols']=[{wch:5},{wch:14},{wch:14},{wch:30},{wch:14},{wch:14},{wch:10}];
  const per={};L.forEach(x=>per[nm(x.kelasId)]=(per[nm(x.kelasId)]||0)+1);
  const w2=XLSX.utils.aoa_to_sheet([['Sekolah',cfg().namaSekolah],['Tahun Ajaran',cfg().tahunAjaran],['Tanggal Export',today()],['Total Siswa',L.length],[],['Kelas','Jumlah'],...Object.entries(per)]);
@@ -332,7 +385,7 @@ A.imp=async f=>{if(!f)return;
  catch(e){toast('File tidak bisa dibaca')}};
 A.ig=async()=>{const b=$('#ig');if(!IMP||!b)return;b.disabled=true;b.textContent='Menyimpan…';const km={},ops=[];let n=0;S.kelas.forEach(k=>km[k.nama]=k.id);
  for(const x of IMP)if(x.kelas&&!km[x.kelas]){const id='k'+Date.now().toString(36)+(n++),t=x.kelas.split(' ')[0];km[x.kelas]=id;ops.push(['kelas',id,{nama:x.kelas,tingkat:['X','XI','XII'].includes(t)?t:'X',waliKelasId:''}])}
- IMP.forEach(x=>ops.push(['siswa',x.nisn,{nisn:x.nisn,kodeQr:x.qr,nama:x.nama,kelasId:km[x.kelas]||'',jk:x.jk,aktif:true}]));
+ IMP.forEach(x=>ops.push(['siswa',x.nisn,{nisn:x.nisn,kodeQr:x.qr,nama:x.nama,kelasId:km[x.kelas]||'',jk:x.jk,aktif:true,status:''}]));
  try{await DB.batch(ops);const t=IMP.length;IMP=null;X();toast(t+' siswa diimpor')}catch(e){b.disabled=false;b.textContent='Coba lagi';toast('Gagal menyimpan impor')}};
 
 // ===== Export QR Code (PNG) =====
@@ -448,9 +501,9 @@ const PG={
  scan:{t:'Layar Scanner',r(){return`<div class="sg"><div class="card"><div class="row" style="justify-content:space-between"><b>Tempelkan kartu pelajar ke kamera</b><button class="btn nf" onclick="A.full()">Tampilan penuh (F)</button></div><div id="fr"></div><div id="reader"></div><div class="row" style="margin-top:10px"><button class="btn s" id="cs" style="display:none" onclick="A.cs()">🔄 Ganti kamera</button><button class="btn s" onclick="A.rc()">↻ Muat ulang kamera</button><button class="btn s" onclick="A.pq()">🖼 Scan dari foto</button><input id="qf" type="file" accept="image/*" hidden onchange="A.qf(this.files[0]);this.value=''"></div><div id="qrtmp" hidden></div><div id="gps" class="chip"></div><input id="mi" placeholder="Cadangan: ketik atau scan NISN lalu Enter" onkeydown="if(event.key=='Enter'){A.sc(this.value);this.value=''}"><div id="res" class="res"></div></div><div class="card"><h3>Sudah absen: <span id="cnt"></span></h3><div id="feed"></div></div></div>`},after(){startCam();updScan()}},
  abs:{t:'Absensi Hari Ini',live:1,r(){const{m,a}=sum(),L=a.filter(s=>(!ak||s.kelasId==ak)&&(!aq||s.nama.toLowerCase().includes(aq)||String(s.nisn).includes(aq))).sort(byN);
   return`<div class="card"><div class="row"><select onchange="A.ak(this.value)"><option value="">Semua kelas</option>${sel(kOpts(),ak)}</select><input placeholder="Cari nama / NISN lalu Enter" value="${H(aq)}" onchange="A.aq(this.value)"></div>${tbl(['Nama','Kelas','Status','Masuk','Pulang',''],L.map(s=>{const r=m[s.id];return[H(s.nama),kn(s.kelasId),r?badge(st(r)):'<small>Belum tercatat</small>',r?fmt(r.jamMasuk):'-',r?fmt(r.jamPulang):'-',`<button class="btn s" onclick="A.ab('${s.id}')">Izin / Koreksi</button> <button class="btn s" onclick="A.rw('${s.id}')">Riwayat</button>`]}))}</div>`}},
- siswa:{t:'Data Siswa',live:1,r(){const L=S.siswa.filter(x=>!fk||x.kelasId==fk).sort(byN);return`<div class="card"><div class="row"><select onchange="A.fk(this.value)"><option value="">Semua kelas</option>${sel(kOpts(),fk)}</select><button class="btn p" onclick="A.ad('siswa')">+ Tambah</button><button class="btn" onclick="A.pick()">Impor Excel/CSV</button><input id="fi" type="file" hidden accept=".xlsx,.xls,.csv" onchange="A.imp(this.files[0]);this.value=''"><button class="btn" onclick="A.tpl()">Template</button><button class="btn" onclick="A.exm()">Export Excel</button><button class="btn" onclick="A.qm()">Export QR Code</button></div>${tbl(['NISN','Nama','Kelas','Status',''],L.map(s=>[H(s.nisn),H(s.nama),kn(s.kelasId),s.aktif===false?'Nonaktif':'Aktif',`<button class="btn s" onclick="A.rw('${s.id}')">Riwayat</button> <button class="btn s" onclick="A.qs('${s.id}')">QR</button> `+act('siswa',s.id)]))}</div>`}},
+ siswa:{t:'Data Siswa',live:1,r(){const L=S.siswa.filter(x=>(!fk||x.kelasId==fk)&&(fs==''?!isLulus(x):fs=='1'?x.aktif!==false:fs=='0'?x.aktif===false&&!isLulus(x):isLulus(x))).sort(byN);return`<div class="card"><div class="row"><select onchange="A.fk(this.value)"><option value="">Semua kelas</option>${sel(kOpts(),fk)}</select><select onchange="A.fs(this.value)">${sel([['','Aktif & nonaktif'],['1','Aktif'],['0','Nonaktif'],['lulus','Lulus']],fs)}</select><button class="btn p" onclick="A.ad('siswa')">+ Tambah</button><button class="btn" onclick="A.nk('')">Kenaikan kelas</button>${fk?`<button class="btn" onclick="A.nk('${fk}')">Naikkan kelas ini</button><button class="btn d" onclick="A.dk('${fk}')">Hapus semua siswa kelas ini</button>`:''}<button class="btn" onclick="A.pick()">Impor Excel/CSV</button><input id="fi" type="file" hidden accept=".xlsx,.xls,.csv" onchange="A.imp(this.files[0]);this.value=''"><button class="btn" onclick="A.tpl()">Template</button><button class="btn" onclick="A.exm()">Export Excel</button><button class="btn" onclick="A.qm()">Export QR Code</button></div>${tbl(['NISN','Nama','Kelas','Status',''],L.map(s=>[H(s.nisn),H(s.nama),kn(s.kelasId),sLbl(s),`<button class="btn s" onclick="A.rw('${s.id}')">Riwayat</button> <button class="btn s" onclick="A.qs('${s.id}')">QR</button> `+act('siswa',s.id)]))}</div>`}},
  users:{t:'Data Guru',live:1,r(){return`<div class="card"><div class="row"><button class="btn p" onclick="A.ad('users')">+ Tambah</button></div>${tbl(['NIP','Nama','Peran','Status',''],S.users.map(u=>[H(u.username||u.id),H(u.nama),u.role=='piket'?'Guru Piket':'Wali Kelas',u.aktif===false?'Nonaktif':'Aktif',act('users',u.id)]))}</div>`}},
- kelas:{t:'Kelas & Jurusan',live:1,r(){return`<div class="card"><div class="row"><button class="btn p" onclick="A.ad('kelas')">+ Tambah</button></div>${tbl(['Kelas','Tingkat','Wali kelas','Siswa',''],S.kelas.map(k=>[H(k.nama),H(k.tingkat),H(S.users.find(u=>u.id==k.waliKelasId)?.nama||'-'),S.siswa.filter(s=>s.kelasId==k.id).length,act('kelas',k.id)]))}</div>`}},
+ kelas:{t:'Kelas & Jurusan',live:1,r(){return`<div class="card"><div class="row"><button class="btn p" onclick="A.ad('kelas')">+ Tambah</button><button class="btn" onclick="A.nk('')">Kenaikan kelas (semua)</button>${cfg().naikId?`<button class="btn" onclick="A.nb()">Batalkan kenaikan terakhir</button>`:''}</div>${tbl(['Kelas','Tingkat','Wali kelas','Siswa',''],S.kelas.map(k=>{const lu=S.siswa.filter(s=>s.kelasId==k.id&&isLulus(s)).length;return[H(k.nama),H(k.tingkat),H(S.users.find(u=>u.id==k.waliKelasId)?.nama||'-'),S.siswa.filter(s=>s.kelasId==k.id&&!isLulus(s)).length+(lu?` <small>(+${lu} lulus)</small>`:''),`<button class="btn s" onclick="A.nk('${k.id}')">Naik kelas</button> <button class="btn s d" onclick="A.dk('${k.id}')">Hapus siswa</button> `+act('kelas',k.id)]}))}</div>`}},
  rekap:{t:'Rekap Kehadiran',r(){const ks=me.role=='walikelas'?S.kelas.filter(k=>k.waliKelasId==me.id):S.kelas;
   return`<div class="card"><div class="row"><input type="month" id="bln" value="${curDay.slice(0,7)}"><select id="rk">${me.role=='admin'?'<option value="">Semua kelas</option>':''}${sel(ks.map(k=>[k.id,k.nama]),'')}</select><button class="btn p" onclick="A.rk()">Tampilkan</button>${me.role=='admin'?'<button class="btn" onclick="A.rx()">Export Excel</button>':''}</div><div id="rt"><p class="empty">Pilih bulan dan kelas.</p></div></div>`},after(){if(me.role=='walikelas'){if(ready()){rkAuto=true;A.rk()}else $('#rt').innerHTML='<p class="empty">Memuat data…</p>'}}},
  man:{t:'Absen Manual',r(){return`<div class="two"><div class="card"><h3>Data absensi manual</h3><label>Status</label><select id="mst">${sel([['izin','Izin'],['sakit','Sakit'],['dispensasi','Dispensasi'],['hadir','Hadir (manual, hari ini)']],'izin')}</select><label>Dari tanggal</label><input type="date" id="mda" value="${curDay}"><label>Sampai tanggal (kosong = 1 hari)</label><input type="date" id="mdb"><label>Keterangan</label><input id="mkt" maxlength="200" placeholder="Contoh: sakit demam, surat dari orang tua"><p class="chip" id="mc"></p><button class="btn p w" onclick="A.msv()">Simpan untuk siswa terpilih</button><h3 style="margin-top:16px">Tercatat manual hari ini</h3><div id="mh"></div></div><div class="card"><div class="row"><select onchange="A.mk(this.value)"><option value="">Pilih kelas</option>${sel(kOpts(),mk)}</select><input placeholder="Cari nama / NISN" value="${H(mq)}" onchange="A.mq(this.value)"></div><div id="ml"></div></div></div>`},after(){mUp()}},
