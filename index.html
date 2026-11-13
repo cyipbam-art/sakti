@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#1D6FF2">
+<meta name="theme-color" content="#5B6EF5">
 <title>SAKTI - Sistem Absensi Kehadiran Terintegrasi</title>
-<link rel="manifest" id="mf" href="data:application/json,%7B%22name%22%3A%22SAKTI%22%2C%22short_name%22%3A%22SAKTI%22%2C%22display%22%3A%22standalone%22%2C%22start_url%22%3A%22.%22%2C%22background_color%22%3A%22%23E4F2FD%22%2C%22theme_color%22%3A%22%231D6FF2%22%7D">
+<link rel="manifest" id="mf" href="data:application/json,%7B%22name%22%3A%22SAKTI%22%2C%22short_name%22%3A%22SAKTI%22%2C%22display%22%3A%22standalone%22%2C%22start_url%22%3A%22.%22%2C%22background_color%22%3A%22%23E9EEFF%22%2C%22theme_color%22%3A%22%235B6EF5%22%7D">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
-:root{--c1:#1D6FF2;--c2:#22B8F0;--c3:#4ADE80;--cd:#0B3A9E;--bg:#E4F2FD;--t:#0B1F3A;--m:#5B7090;--bo:#DCE8F5;--card:rgba(255,255,255,.82);--ok:#10B981;--wr:#F59E0B;--er:#EF4444;--sh:0 10px 30px rgba(29,111,242,.10);--g:linear-gradient(135deg,var(--c1),var(--c2) 60%,var(--c3))}
+:root{--c1:#5B6EF5;--c2:#6CB8F5;--c3:#9B7BF0;--cd:#3B4BD8;--bg:#E9EEFF;--t:#0F1B4D;--m:#5F6B94;--bo:color-mix(in srgb,var(--c1) 14%,transparent);--card:rgba(255,255,255,.6);--ok:#16A34A;--wr:#F59E0B;--er:#E11D48;--sh:0 10px 40px color-mix(in srgb,var(--c1) 12%,transparent);--g:linear-gradient(135deg,var(--c1),var(--c3))}
 *{box-sizing:border-box;margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
 html{-webkit-text-size-adjust:100%}
 body{background:var(--bg) linear-gradient(180deg,#CFE8FB,#EAF5FE 45%,#E4F2FD) fixed;color:var(--t);font-size:14px;min-height:100vh}
@@ -87,32 +87,95 @@ tr:hover td{background:rgba(34,184,240,.06)}
 .trend svg{width:100%;height:auto;display:block}
 details summary{cursor:pointer;color:var(--m);font-size:12px;margin-top:6px}
 #bn{display:none}#pa{display:none}
+/* ===== tema kaca pastel ===== */
+body{background:linear-gradient(135deg,color-mix(in srgb,var(--c2) 13%,#fff),color-mix(in srgb,var(--c1) 15%,#fff) 48%,color-mix(in srgb,var(--c3) 14%,#fff)) fixed}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(520px 420px at 8% 12%,color-mix(in srgb,var(--c2) 38%,transparent),transparent 70%),radial-gradient(560px 460px at 92% 18%,color-mix(in srgb,var(--c3) 30%,transparent),transparent 70%),radial-gradient(520px 420px at 70% 96%,color-mix(in srgb,var(--c1) 22%,transparent),transparent 70%)}
+#sb{inset:16px auto 16px 16px;width:232px;border-radius:28px;background:rgba(255,255,255,.55);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.8);box-shadow:var(--sh);color:var(--m);padding:18px 12px}
+#sb::after{display:none}
+.brand b{color:var(--t)}.brand small{opacity:1;color:var(--m)}
+.ni{color:var(--m);border-radius:16px}.ni:hover{background:rgba(255,255,255,.6);color:var(--c1)}
+.ni.on{background:rgba(255,255,255,.9);color:var(--c1);box-shadow:0 6px 18px color-mix(in srgb,var(--c1) 16%,transparent),inset 0 0 0 1px rgba(255,255,255,.9)}
+.ni.lo{background:none;margin-top:auto}.ni.lo:hover{background:rgba(225,29,72,.08);color:var(--er)}
+#mn{margin-left:264px;padding:0 28px 24px 12px}
+#tb{background:transparent;backdrop-filter:none;padding:18px 0 10px}
+#tb h1{font-size:15px;font-weight:700;color:var(--m)}
+#clk{background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.85);border-radius:99px;padding:7px 14px;font-size:13px}
+.who{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.85);backdrop-filter:blur(16px);padding:5px 14px 5px 5px;border-radius:99px}
+.who b{display:block;font-size:13px;line-height:1.2;color:var(--t)}.who small{display:block;font-size:11px;color:var(--m);font-weight:600}
+.av{width:34px;height:34px;border-radius:50%;background:var(--g);color:#fff;display:grid;place-items:center;font-weight:800;flex:none}
+.card{background:var(--card);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.8);border-radius:24px;box-shadow:var(--sh),inset 0 1px 0 rgba(255,255,255,.85);padding:20px;transition:transform .2s,box-shadow .2s}
+.card:hover{box-shadow:0 14px 46px color-mix(in srgb,var(--c1) 17%,transparent),inset 0 1px 0 rgba(255,255,255,.85)}
+.btn{background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);box-shadow:0 2px 8px color-mix(in srgb,var(--c1) 8%,transparent)}.btn:hover{border-color:var(--c1);color:var(--c1)}
+.btn.p{background:var(--g);color:#fff;border-color:transparent;box-shadow:0 10px 22px color-mix(in srgb,var(--c1) 32%,transparent)}.btn.p:hover{color:#fff;filter:brightness(1.05)}
+input,select,textarea{background:rgba(255,255,255,.72);border:1px solid color-mix(in srgb,var(--c1) 16%,transparent)}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--c1);box-shadow:0 0 0 4px color-mix(in srgb,var(--c1) 14%,transparent)}
+tr:hover td{background:color-mix(in srgb,var(--c1) 5%,transparent)}
+.mc{background:rgba(255,255,255,.9);backdrop-filter:blur(24px)}
+.toast{background:var(--t)}
+.dvon{background:color-mix(in srgb,var(--c1) 8%,transparent);border-color:var(--c1);color:var(--cd)}
+.sec{color:var(--c1)}
+.bar{background:color-mix(in srgb,var(--c1) 12%,transparent)}.bar i.l{background:color-mix(in srgb,var(--c2) 55%,transparent)}
+/* dashboard */
+.dh{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin:6px 0 16px}
+.dh small{color:var(--m);font-size:14px;font-weight:600}.dh h2{font-size:32px;font-weight:800;letter-spacing:-.02em;line-height:1.15;color:var(--t)}.dh p{color:var(--m);margin-top:4px}
+.qa{margin:0 0 16px;display:flex;gap:10px;flex-wrap:wrap}
+.qa button{display:flex;flex-direction:row;gap:10px;padding:8px 16px 8px 8px;border-radius:99px;background:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.85);box-shadow:var(--sh);font-size:13px}
+.qa .ti{width:34px;height:34px;border-radius:50%;background:color-mix(in srgb,var(--c1) 12%,transparent);color:var(--c1)}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:18px}.kpi .card{margin:0}
+.kc .ki{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;margin-bottom:14px}
+.kc small{display:block;color:var(--m);font-weight:600;font-size:13px}.kc b{display:block;font-size:30px;font-weight:800;line-height:1.2;margin:2px 0 8px;color:var(--t)}
+.kc .dl{font-size:12px;font-weight:700;color:var(--m)}.kc .dl i{font-style:normal;font-weight:800}
+.k1 .ki{background:rgba(22,163,74,.13);color:#16A34A}.k2 .ki{background:rgba(245,158,11,.16);color:#D97706}.k3 .ki{background:color-mix(in srgb,var(--c2) 22%,transparent);color:#2563EB}.k4 .ki{background:rgba(242,127,191,.22);color:#DB2777}
+.d2{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;margin-bottom:18px;align-items:stretch}.d2.r{grid-template-columns:1fr 1fr}.d2 .card{margin:0}
+.ch{display:flex;align-items:center;gap:10px;margin-bottom:12px}.ch h3{flex:1;margin:0}.ch select{width:auto;padding:6px 12px;border-radius:99px;font-size:12px;font-weight:700}
+.ci{width:34px;height:34px;border-radius:11px;background:color-mix(in srgb,var(--c1) 12%,transparent);color:var(--c1);display:grid;place-items:center}
+.dnw{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center}.dn{width:170px;height:170px}
+.dlg{flex:1;min-width:150px;display:grid;gap:9px}.dlg div{display:flex;align-items:center;gap:8px;font-size:13px}.dlg i{width:10px;height:10px;border-radius:50%;flex:none}.dlg span{flex:1;color:var(--m);font-weight:600}.dlg b{min-width:28px;text-align:right}.dlg em{font-style:normal;color:var(--m);font-size:12px;min-width:38px;text-align:right}
+.pr{display:flex;align-items:center;gap:10px;margin:10px 0}.pr .ci{width:32px;height:32px}.pr>div{flex:1;min-width:0}.pr small{display:flex;justify-content:space-between;color:var(--m);font-weight:600;gap:8px}.pr small b{color:var(--t)}.pr .bar{margin:5px 0 0}
+.fn{display:flex;align-items:center;gap:6px}.fn svg{flex:none;width:min(260px,62%);height:auto}.fl{flex:1}.fl div{height:calc(100% / 4);min-height:50px;display:flex;flex-direction:column;justify-content:center;border-left:2px dotted color-mix(in srgb,var(--c1) 30%,transparent);padding-left:12px}.fl b{font-size:16px}.fl small{color:var(--m);font-weight:600}
+.trend svg{max-height:260px}
 /* login */
-#lg{min-height:100vh;display:grid;place-items:center;padding:24px;background:#E6F0FE}
-.lbox{width:100%;max-width:980px;display:grid;grid-template-columns:1fr 1fr;border-radius:40px;overflow:hidden;background:#fff;box-shadow:0 30px 70px rgba(29,111,242,.22);min-height:520px}
-.lleft{position:relative;overflow:hidden;background:linear-gradient(165deg,var(--c1),var(--cd));color:#fff;padding:36px 30px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;border-radius:0 130px 130px 0}
-.lleft::before{content:"";position:absolute;right:-70px;top:-60px;width:260px;height:260px;border-radius:50%;background:linear-gradient(160deg,var(--c3),var(--c2));opacity:.7}
-.lleft>*{position:relative}.lbrand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}.lleft h2{font-size:26px;font-weight:800;margin-top:6px}.lleft p{opacity:.9;font-size:13px;max-width:280px}
-.ill{width:100%;max-width:300px;margin:auto}.lfoot{font-size:11px!important;opacity:.8!important;margin-top:auto}
-.lright{display:grid;place-items:center;padding:28px}
-.lcard{width:100%;max-width:340px;border-radius:22px;box-shadow:0 14px 40px rgba(11,31,58,.14);overflow:hidden;background:#fff}
-.ltabs{display:flex;background:#F1F5FB}.ltabs button{flex:1;padding:14px;border:0;background:none;font-weight:700;color:var(--m);cursor:pointer;font-size:14px;border-bottom:3px solid transparent}.ltabs button.on{color:var(--t);background:#fff;border-bottom-color:var(--c1)}
-.lform{padding:22px;display:grid;gap:6px}
-.lf{position:relative}.lf>svg{position:absolute;left:0;bottom:11px;color:var(--c1)}
-.lf input{border:0;border-bottom:2px solid var(--c1);border-radius:0;padding:10px 4px 10px 30px;background:none}
-.lf input:focus-visible{outline:0;border-bottom-color:var(--c3)}
-.lf label{margin:8px 0 0;color:var(--c1)}
-.er{color:var(--er);min-height:18px;font-size:13px;font-weight:600}
+#lg{min-height:100vh;display:grid;place-items:center;padding:24px;position:relative;overflow:hidden;background:none}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;animation:flt 24s ease-in-out infinite alternate}
+.o1{width:380px;height:380px;background:color-mix(in srgb,var(--c2) 60%,#fff);left:-80px;top:-60px}.o2{width:420px;height:420px;background:color-mix(in srgb,var(--c3) 55%,#fff);right:-100px;top:20%;animation-delay:-8s}.o3{width:340px;height:340px;background:color-mix(in srgb,var(--c1) 45%,#fff);left:30%;bottom:-120px;animation-delay:-14s}
+@keyframes flt{to{transform:translate(50px,-40px) scale(1.12)}}
+.lbox{position:relative;width:100%;max-width:1000px;display:grid;grid-template-columns:1.05fr 1fr;border-radius:36px;overflow:hidden;background:rgba(255,255,255,.55);backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px);border:1px solid rgba(255,255,255,.85);box-shadow:0 30px 80px color-mix(in srgb,var(--c1) 22%,transparent);min-height:540px}
+.lleft{position:relative;overflow:hidden;background:linear-gradient(160deg,color-mix(in srgb,var(--c1) 95%,transparent),color-mix(in srgb,var(--c3) 92%,transparent));color:#fff;padding:34px 32px;display:flex;flex-direction:column;gap:10px;border-radius:0 0 0 0}
+.lleft::before{content:"";position:absolute;right:-90px;top:-90px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.35),transparent 70%)}
+.lleft::after{content:"";position:absolute;left:-60px;bottom:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--c2) 55%,transparent),transparent 70%)}
+.lleft>*{position:relative;z-index:1}.lbrand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+.lleft h2{font-size:30px;font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-top:18px;max-width:320px}.lleft p{opacity:.92;font-size:13px;max-width:320px}
+.mock{margin:auto 0;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);border-radius:22px;padding:16px;backdrop-filter:blur(10px);max-width:330px;animation:bob 6s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(-8px)}}
+.mock .mr{display:flex;align-items:center;gap:14px}.mock small{opacity:.9;font-size:12px}.mock b{font-size:22px;display:block}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chips span{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);border-radius:99px;padding:5px 12px;font-size:12px;font-weight:700}
+.lfoot{font-size:11px!important;opacity:.8!important;margin-top:auto}
+.lright{display:grid;place-items:center;padding:30px}
+.lcard{width:100%;max-width:350px}
+.lcard h3{font-size:26px;font-weight:800;letter-spacing:-.02em}.lcard>p{color:var(--m);margin:4px 0 18px}
+.ltabs{display:flex;background:color-mix(in srgb,var(--c1) 10%,transparent);border-radius:99px;padding:4px;gap:4px}.ltabs button{flex:1;padding:10px;border:0;background:none;font-weight:700;color:var(--m);cursor:pointer;font-size:14px;border-radius:99px;transition:background .25s,color .25s,box-shadow .25s}.ltabs button.on{background:#fff;color:var(--c1);box-shadow:0 4px 12px color-mix(in srgb,var(--c1) 20%,transparent)}
+.lform{display:grid;gap:4px;margin-top:16px}
+.lf{position:relative}.lf>svg{position:absolute;left:14px;bottom:13px;color:var(--c1);z-index:1}
+.lf input{padding:12px 14px 12px 44px;border-radius:16px;font-size:14px}
+.lf label{margin:10px 0 5px}
+.pw{display:block}
+.er{color:var(--er);min-height:20px;font-size:13px;font-weight:600}.er:not(:empty){background:rgba(225,29,72,.08);border-radius:12px;padding:8px 12px;animation:shk .4s}
+@keyframes shk{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
 .lnote{text-align:center;font-size:12px;color:var(--m);margin-top:6px}
+
+.d3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:18px}.d3 .card{margin:0;min-width:0}.d2.fw{grid-template-columns:1fr}.d2.fw .fn{max-width:620px;margin:auto}
+@media(max-width:1100px){.d3{grid-template-columns:1fr}.kpi{grid-template-columns:repeat(2,1fr)}.d2,.d2.r{grid-template-columns:1fr}}
 @media(max-width:800px){
 #sb{display:none}#mn{margin-left:0!important;padding:0 14px 110px}.two,.sg{grid-template-columns:1fr}
 #tb .who{display:none}#clk{font-size:13px}
 input,select,textarea{font-size:16px}
-.lbox{grid-template-columns:1fr;border-radius:30px}.lleft{border-radius:0 0 90px 90px;padding:24px 20px 40px}.ill{max-width:150px}.lleft h2{font-size:22px}.lfoot{display:none}
-.lright{padding:0 16px 24px;margin-top:-26px;position:relative;z-index:2}
-#bn{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-radius:28px;padding:6px;box-shadow:0 12px 30px rgba(29,111,242,.25);z-index:6;justify-content:space-around}
-#bn .ni{flex-direction:column;gap:2px;font-size:11px;color:var(--m);width:auto;padding:7px 12px}#bn .ni.on{background:var(--g);color:#fff;box-shadow:none}
-.hero{padding:20px 18px 58px}}
+.dh h2{font-size:24px}.kc b{font-size:24px}.kpi{gap:12px}.fn svg{width:60%}
+.lbox{grid-template-columns:1fr;border-radius:30px;min-height:0}.lleft{padding:22px 22px 24px}.lleft h2{font-size:22px;margin-top:10px}.mock{display:none}.lfoot{display:none}.chips{margin-top:4px}
+.lright{padding:22px 16px 26px}
+#bn{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.78);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.9);border-radius:28px;padding:6px;box-shadow:0 12px 30px color-mix(in srgb,var(--c1) 25%,transparent);z-index:6;justify-content:space-around}
+#bn .ni{flex-direction:column;gap:2px;font-size:11px;color:var(--m);width:auto;padding:7px 12px}#bn .ni.on{background:var(--g);color:#fff;box-shadow:none}}
+@media(max-width:480px){.kpi{grid-template-columns:1fr 1fr}.dnw{justify-content:center}}
+@media(prefers-reduced-transparency:reduce){.card,#sb,.lbox{backdrop-filter:none;background:rgba(255,255,255,.92)}}
 @keyframes pgIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
 @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
@@ -132,16 +195,18 @@ input,select,textarea{font-size:16px}
 </style>
 </head>
 <body>
-<div id="lg"><div class="lbox">
- <div class="lleft"><div class="lbrand"><span id="llogo"></span><span id="lapp">SAKTI</span></div><h2>Selamat Datang!!</h2><p id="lsch"></p>
-  <svg class="ill" viewBox="0 0 300 250" aria-hidden="true"><ellipse cx="150" cy="218" rx="112" ry="22" fill="#fff" opacity=".16"/><rect x="88" y="34" width="124" height="170" rx="20" fill="#fff"/><rect x="98" y="48" width="104" height="124" rx="12" fill="#E8F2FF"/><g fill="#1D4ED8"><rect x="108" y="58" width="26" height="26" rx="4"/><rect x="166" y="58" width="26" height="26" rx="4"/><rect x="108" y="136" width="26" height="26" rx="4"/><rect x="142" y="92" width="8" height="8"/><rect x="156" y="100" width="8" height="8"/><rect x="170" y="92" width="8" height="8"/><rect x="142" y="116" width="8" height="8"/><rect x="170" y="124" width="8" height="8"/><rect x="154" y="140" width="8" height="8"/><rect x="176" y="144" width="12" height="12"/></g><g fill="#fff"><rect x="113" y="63" width="16" height="16" rx="2"/><rect x="171" y="63" width="16" height="16" rx="2"/><rect x="113" y="141" width="16" height="16" rx="2"/></g><g fill="#1D4ED8"><rect x="117" y="67" width="8" height="8"/><rect x="175" y="67" width="8" height="8"/><rect x="117" y="145" width="8" height="8"/></g><rect x="96" y="112" width="108" height="4" rx="2" fill="#22B8F0" opacity=".85"/><circle cx="150" cy="188" r="6" fill="#C7D7F5"/><circle cx="224" cy="52" r="26" fill="#4ADE80" stroke="#fff" stroke-width="5"/><path d="M212 52l9 9 17-18" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="40" y="150" width="50" height="42" rx="10" fill="#FBBF24"/><path d="M50 150v-12a15 15 0 0 1 30 0v12" stroke="#E5A50A" stroke-width="7" fill="none"/><circle cx="65" cy="170" r="5" fill="#92400E"/></svg>
+<div id="lg"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="lbox">
+ <div class="lleft"><div class="lbrand"><span id="llogo"></span><span id="lapp">SAKTI</span></div><h2>Absensi cerdas, tanpa antre.</h2><p id="lsch"></p>
+  <div class="mock" aria-hidden="true"><div class="mr"><svg width="74" height="74" viewBox="0 0 74 74"><circle cx="37" cy="37" r="29" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="9"/><circle cx="37" cy="37" r="29" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-dasharray="168 182" transform="rotate(-90 37 37)"/><text x="37" y="42" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">92%</text></svg><div><small>Kehadiran hari ini</small><b>Hadir tepat waktu</b></div></div>
+   <svg viewBox="0 0 280 60" width="100%" style="margin-top:10px"><path d="M0 46 L40 38 L80 42 L120 24 L160 30 L200 14 L240 20 L280 8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="280" cy="8" r="5" fill="#fff"/></svg></div>
+  <div class="chips"><span>Scan QR</span><span>Rekap otomatis</span><span>Kabar orang tua</span></div>
   <p class="lfoot" id="lfoot"></p></div>
- <div class="lright"><div class="lcard"><div class="ltabs"><button id="tg" class="on" onclick="A.tab('g')">Guru</button><button id="ta" onclick="A.tab('a')">Admin</button></div>
+ <div class="lright"><div class="lcard"><h3>Selamat datang kembali</h3><p>Masuk untuk mengelola absensi sekolah.</p><div class="ltabs"><button id="tg" class="on" onclick="A.tab('g')">Guru</button><button id="ta" onclick="A.tab('a')">Admin</button></div>
   <div class="lform"><input type="hidden" id="lt" value="g">
    <div class="lf"><label for="lu" id="llu">NIP</label><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><input id="lu" placeholder="Masukkan NIP" autocomplete="username"></div>
    <div class="lf"><label for="lp">Password</label><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><input id="lp" type="password" placeholder="Masukkan password" autocomplete="current-password" onkeydown="if(event.key=='Enter')A.login()"></div>
-   <button class="btn p w" style="margin-top:12px;padding:12px" id="lbtn" onclick="A.login()">Masuk</button><div id="lerr" class="er" role="alert"></div><div id="lpv"></div>
-   <p class="lnote">Lupa password? Hubungi admin sekolah.</p></div></div></div>
+   <button class="btn p w" style="margin-top:14px;padding:13px;font-size:15px" id="lbtn" onclick="A.login()">Masuk</button><div id="lerr" class="er" role="alert"></div><div id="lpv"></div>
+   <p class="lnote"><a href="#" onclick="A.lupa();return false" style="color:var(--c1);font-weight:700">Lupa password?</a> Tautan reset dikirim ke email terdaftar.</p></div></div></div>
 </div></div>
 <div id="app">
  <aside id="sb"><div class="brand"><span id="slogo"></span><div><b id="sapp">SAKTI</b><small id="ssch"></small></div></div><div id="nv"></div><button class="ni lo" onclick="A.out()"><svg class="ic" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Keluar</button></aside>
@@ -186,7 +251,8 @@ const X=A.X=()=>$('#mo')?.remove();
 const modal=(h,w)=>{X();const e=document.createElement('div');e.className='mo';e.id='mo';e.setAttribute('role','dialog');e.setAttribute('aria-modal','true');e.innerHTML='<div class="mc'+(w?' wd':'')+'">'+h+'</div>';e.onclick=v=>{if(v.target==e)X()};document.body.append(e);const f=e.querySelector('input:not([type=hidden]):not(:disabled),select,button.p');f?.focus()};
 document.addEventListener('keydown',e=>{if(e.key=='Escape')X()});
 const info=(t,m)=>modal(`<h3>${H(t)}</h3><p style="margin:10px 0">${m}</p><div class="row"><button class="btn p w" onclick="A.X()">Mengerti</button></div>`);
-const errMsg=e=>e?.code==='permission-denied'?'ditolak oleh aturan database':'periksa koneksi lalu coba lagi';
+const EM={'permission-denied':'ditolak oleh aturan database','auth/admin-restricted-operation':'pendaftaran akun dinonaktifkan di Firebase Authentication (aktifkan "Enable create (sign-up)")','auth/operation-not-allowed':'metode Email/Password belum diaktifkan di Firebase Authentication','auth/invalid-email':'format email tidak valid','auth/too-many-requests':'dibatasi Firebase, coba lagi beberapa menit lagi'};
+const errMsg=e=>EM[e?.code]||'periksa koneksi lalu coba lagi';
 const ask=(t,m,ok,fn,extra='')=>{modal(`<h3>${H(t)}</h3><p style="margin:10px 0">${m}</p>${extra}<div class="row" style="margin-top:16px"><button class="btn" onclick="A.X()">Batal</button><button class="btn p dg" id="cfy">${H(ok)}</button></div>`);
  const gt=$('#gt');if(gt){$('#cfy').disabled=true;gt.oninput=()=>{$('#cfy').disabled=gt.value.trim().toUpperCase()!=(gt.dataset.w||'HAPUS')}}
  $('#cfy').onclick=async()=>{const b=$('#cfy');b.disabled=true;b.textContent='Memproses…';try{await fn();X();toast('Berhasil')}catch(e){X();toast('Gagal: '+errMsg(e))}}};
@@ -197,7 +263,8 @@ const byN=(a,b)=>String(a.nama).localeCompare(String(b.nama));
 const sLbl=s=>s.aktif!==false?'Aktif':s.status=='lulus'?'Lulus':'Nonaktif';
 const norm=s=>String(s||'').trim().replace(/\s+/g,' ').toLowerCase();
 const chunks=(a,n)=>{const o=[];for(let i=0;i<a.length;i+=n)o.push(a.slice(i,i+n));return o};
-const IC={dash:'<rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/>',
+const hpNorm=v=>{let d=String(v||'').replace(/[^\d+]/g,'').replace(/^\+/,'');if(d.startsWith('0'))d='62'+d.slice(1);else if(d.startsWith('8'))d='62'+d;return /^62\d{8,13}$/.test(d)?d:''};
+const IC={wa:'<path d="M21 12a8 8 0 0 1-11.7 7L3 21l2-6.2A8 8 0 1 1 21 12Z"/>',dash:'<rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/>',
  scan:'<path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/>',
  list:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',edit:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
  cap:'<path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/>',users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
@@ -208,13 +275,13 @@ const IC={dash:'<rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3
 const ico=k=>`<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${IC[k]||''}</svg>`;
 
 // ===== Identitas, logo & tema =====
-const THEMES={samudra:['Samudra','#1D6FF2','#22B8F0','#4ADE80','#0B3A9E'],langit:['Langit','#2563EB','#38BDF8','#7DD3FC','#1E3A8A'],hutan:['Hutan','#0F9D6E','#34D399','#A3E635','#065F46'],senja:['Senja','#7C3AED','#38BDF8','#F472B6','#4C1D95']};
+const THEMES={indigo:['Indigo','#5B6EF5','#6CB8F5','#9B7BF0','#3B4BD8'],samudra:['Samudra','#1D6FF2','#22B8F0','#4ADE80','#0B3A9E'],langit:['Langit','#2563EB','#38BDF8','#7DD3FC','#1E3A8A'],hutan:['Hutan','#0F9D6E','#34D399','#A3E635','#065F46'],senja:['Senja','#7C3AED','#38BDF8','#F472B6','#4C1D95']};
 const logoUrl=l=>{l=String(l||'').trim();if(!/^https:\/\//i.test(l))return['',''];const m=l.match(/\/d\/([\w-]{10,})/)||l.match(/[?&]id=([\w-]{10,})/);
  if(/(drive|docs)\.google\.com/i.test(l)&&m)return['https://lh3.googleusercontent.com/d/'+m[1]+'=w400','https://drive.google.com/thumbnail?id='+m[1]+'&sz=w400'];return[l,'']};
 const initials=()=>{const c=cfg(),s=c.singkatan||c.namaSekolah.split(/\s+/).map(w=>w[0]).join('');return H(String(s).slice(0,3).toUpperCase())};
 const logoHTML=(px,link)=>{const[u,alt]=logoUrl(link??cfg().logoLink);return`<span class="lg" style="width:${px}px;height:${px}px;font-size:${Math.round(px/3)}px">${initials()}${u?`<img src="${H(u)}" data-alt="${H(alt)}" alt="Logo" referrerpolicy="no-referrer" onerror="A.le(this)">`:''}</span>`};
 A.le=i=>{if(i.dataset.alt){i.src=i.dataset.alt;i.dataset.alt=''}else i.remove()};
-function applyBrand(){const c=cfg(),t=THEMES[c.tema]||THEMES.samudra,r=document.documentElement.style;
+function applyBrand(){const c=cfg(),t=THEMES[c.tema]||THEMES.indigo,r=document.documentElement.style;
  r.setProperty('--c1',t[1]);r.setProperty('--c2',t[2]);r.setProperty('--c3',t[3]);r.setProperty('--cd',t[4]);
  $('meta[name=theme-color]').content=t[1];document.title=c.appName+' - '+c.namaSekolah;
  $('#llogo').innerHTML=logoHTML(46);$('#lapp').textContent=c.appName;$('#lsch').textContent=c.namaSekolah+(c.tagline?' · '+c.tagline:'');
@@ -228,11 +295,11 @@ const QS=(()=>{let mem=[],db=null;
  return{all:async()=>IS_PREVIEW?[...mem]:(await tx('readonly',s=>s.getAll()))||[],add:async x=>{if(IS_PREVIEW)mem.push(x);else await tx('readwrite',s=>s.put(x))},del:async id=>{if(IS_PREVIEW)mem=mem.filter(x=>x.id!=id);else await tx('readwrite',s=>s.delete(id))}}})();
 
 // ===== State & konfigurasi =====
-let DB,me=null,S={settings:[],users:[],siswa:[],kelas:[],absensi:[],libur:[],liburSekolah:[]},LD=new Set(),page='',unsubs=[],abU=null,camera=null,camList=[],camIdx=-1,curDay=today(),rt,fk='',fs='',aq='',ak='',last={c:'',t:0},RK=null,fails=0,lockUntil=0,PLAN=[],pmS='',QC=[],FORCE_OFF=false,devMode=false;
+let DB,me=null,S={settings:[],users:[],siswa:[],kelas:[],absensi:[],libur:[],liburSekolah:[],waLog:[]},LD=new Set(),page='',unsubs=[],abU=null,camera=null,camList=[],camIdx=-1,curDay=today(),rt,fk='',fs='',aq='',ak='',last={c:'',t:0},RK=null,fails=0,lockUntil=0,PLAN=[],pmS='',QC=[],FORCE_OFF=false,devMode=false;
 const ready=()=>['settings','siswa','kelas'].every(x=>LD.has(x));
 const LEVELS={smk:['X','XI','XII'],smp:['VII','VIII','IX'],sd:['I','II','III','IV','V','VI']};
 const JENJANG={smk:'SMK / SMA (X - XII)',smp:'SMP / MTs (VII - IX)',sd:'SD / MI (I - VI)'};
-const cfg=()=>({appName:'SAKTI',tagline:'Sistem Absensi Kehadiran Terintegrasi',namaSekolah:'Nama Sekolah Anda',singkatan:'',npsn:'',alamat:'',kota:'',telepon:'',email:'',kepsek:'',nipKepsek:'',logoLink:'',tema:'samudra',footerText:'',tahunAjaran:'2026/2027',jenjang:'smk',jamMasukBatas:'07:00',jamPulangMulai:'15:00',hariAktif:'1,2,3,4,5',hariLibur:'',liburNasional:'1',cutiBersama:'1',titikAbsen:'Gerbang Utama',cekGps:'0',lat:'',lng:'',radiusM:'150',liburApi:'https://liburin.vercel.app/api?year={year}',...(S.settings.find(x=>x.id=='school')||{})});
+const cfg=()=>({appName:'SAKTI',tagline:'Sistem Absensi Kehadiran Terintegrasi',namaSekolah:'Nama Sekolah Anda',singkatan:'',npsn:'',alamat:'',kota:'',telepon:'',email:'',kepsek:'',nipKepsek:'',logoLink:'',tema:'indigo',footerText:'',tahunAjaran:'2026/2027',jenjang:'smk',jamMasukBatas:'07:00',jamPulangMulai:'15:00',hariAktif:'1,2,3,4,5',hariLibur:'',liburNasional:'1',cutiBersama:'1',titikAbsen:'Gerbang Utama',alpaJam:'10:00',waIzin:'Yth. Bapak/Ibu orang tua/wali dari {nama} ({kelas}). Kami dari {sekolah} mencatat bahwa ananda IZIN pada {tanggal}. {keterangan}Terima kasih.',waSakit:'Yth. Bapak/Ibu orang tua/wali dari {nama} ({kelas}). Kami dari {sekolah} mencatat bahwa ananda SAKIT pada {tanggal}. {keterangan}Semoga lekas sembuh. Terima kasih.',waAlpa:'Yth. Bapak/Ibu orang tua/wali dari {nama} ({kelas}). Kami dari {sekolah} mencatat bahwa ananda belum hadir tanpa keterangan (ALPA) pada {tanggal}. Mohon konfirmasi kepada wali kelas atau sekolah. Terima kasih.',cekGps:'0',lat:'',lng:'',radiusM:'150',liburApi:'https://liburin.vercel.app/api?year={year}',...(S.settings.find(x=>x.id=='school')||{})});
 const lv=()=>LEVELS[cfg().jenjang]||LEVELS.smk;
 const kn=id=>H(S.kelas.find(x=>x.id==id)?.nama||'-');
 const kOpts=()=>S.kelas.slice().sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true})).map(k=>[k.id,k.nama]);
@@ -244,7 +311,7 @@ const frameNote=()=>(inFrame||inApp)?`<div class="fr" style="margin-top:8px">Apl
 A.nt=()=>{if(!/^https?:$/.test(location.protocol))return toast('Buka aplikasi langsung dari alamat hosting-nya (https://...)');const w=window.open(location.href,'_blank','noopener');if(!w)toast('Pop-up diblokir. Salin alamat: '+location.href)};
 
 // ===== Lapisan data: memori (preview) atau Firestore (produksi) =====
-function memDB(){const d={users:[],siswa:[],kelas:[],absensi:[],settings:[],izinManual:[],ringkasan:[],libur:[],liburSekolah:[]},ls={};
+function memDB(){const accts=new Map([['guru.piket@contoh.sch.id','piket123'],['wali.kelas@contoh.sch.id','wali123']]);let cur='';const d={users:[],nipEmail:[],siswa:[],kelas:[],absensi:[],settings:[],izinManual:[],ringkasan:[],libur:[],liburSekolah:[],waLog:[]},ls={};
  const ok=(x,[f,o,v])=>o=='=='?x[f]==v:o=='>='?x[f]>=v:o=='<='?x[f]<=v:o=='in'?v.includes(x[f]):false;
  const fl=(c,w=[])=>d[c].filter(x=>w.every(k=>ok(x,k))).map(x=>({...x}));
  const emit=c=>(ls[c]||[]).forEach(([f,w])=>f(fl(c,w)));
@@ -256,12 +323,23 @@ function memDB(){const d={users:[],siswa:[],kelas:[],absensi:[],settings:[],izin
   batch:async ops=>{ops.forEach(([c,id,v])=>put(c,id,v));[...new Set(ops.map(o=>o[0]))].forEach(emit)},
   create:async(c,id,v)=>{if(d[c].some(x=>x.id==id))return false;put(c,id,v);emit(c);return true},
   setIf:async(c,id,k,v)=>{const x=d[c].find(y=>y.id==id);if(!x)return'none';if(x[k])return'dup';x[k]=v;emit(c);return'ok'},
-  boot:async()=>null}}
+  boot:async()=>null,fresh:async()=>{cur=''},out:async()=>{cur=''},
+  lookupNip:async n=>d.nipEmail.find(x=>x.id==n)?.email||null,
+  signIn:async(e,p)=>{e=String(e).toLowerCase();if(accts.get(e)!==p)throw{code:'auth/invalid-credential'};cur=e},
+  createAcct:async e=>{e=e.toLowerCase();if(accts.has(e))return'exists';accts.set(e,'preview123');return'new'},
+  resetMail:async()=>{},
+  changePw:async(o,n)=>{if(accts.get(cur)!==o)throw{code:'auth/invalid-credential'};accts.set(cur,n)}}}
 async function fbDB(){const u='https://www.gstatic.com/firebasejs/10.12.2/';
  const [A1,F,U]=await Promise.all([import(u+'firebase-app.js'),import(u+'firebase-firestore.js'),import(u+'firebase-auth.js')]);
  const app=A1.initializeApp(firebaseConfig),db=F.getFirestore(app),au=U.getAuth(app);
  const Q=(c,w=[])=>F.query(F.collection(db,c),...w.map(x=>F.where(...x)));
- return{ts:()=>F.serverTimestamp(),auth:(e,p)=>U.signInWithEmailAndPassword(au,e,p),out:()=>U.signOut(au),
+ return{ts:()=>F.serverTimestamp(),auth:(e,p)=>U.signInWithEmailAndPassword(au,e,p),out:()=>U.signOut(au),fresh:async()=>{try{await U.signOut(au)}catch{}try{await U.signInAnonymously(au)}catch{}},
+  lookupNip:async n=>(await F.getDoc(F.doc(db,'nipEmail',n))).data()?.email||null,
+  signIn:(e,p)=>U.signInWithEmailAndPassword(au,e,p),
+  createAcct:async e=>{const a1=A1.getApps().find(x=>x.name=='sec')||A1.initializeApp(firebaseConfig,'sec'),a2=U.getAuth(a1);
+   try{await U.createUserWithEmailAndPassword(a2,e,rnd()+'Aa1!');await U.signOut(a2);return'new'}catch(x){if(x.code=='auth/email-already-in-use')return'exists';throw x}},
+  resetMail:async e=>{au.languageCode='id';await U.sendPasswordResetEmail(au,e)},
+  changePw:async(o,n)=>{const x=au.currentUser;await U.reauthenticateWithCredential(x,U.EmailAuthProvider.credential(x.email,o));await U.updatePassword(x,n)},
   // Sesi anonim dipakai agar Security Rules menolak klien tanpa sesi. Hanya akun email/password yang dianggap admin.
   boot:async()=>{const x=await new Promise(r=>{const un=U.onAuthStateChanged(au,y=>{un();r(y)})});
    if(x&&!x.isAnonymous&&x.email)return x;if(!x){try{await U.signInAnonymously(au)}catch(e){DB.anonErr=e.code||'err'}}return null},
@@ -274,12 +352,12 @@ async function fbDB(){const u='https://www.gstatic.com/firebasejs/10.12.2/';
   create:(c,id,v)=>F.runTransaction(db,async t=>{const r=F.doc(db,c,id),s=await t.get(r);if(s.exists())return false;t.set(r,v);return true}),
   setIf:(c,id,k,v)=>F.runTransaction(db,async t=>{const r=F.doc(db,c,id),s=await t.get(r);if(!s.exists())return'none';if(s.data()[k])return'dup';t.update(r,{[k]:v});return'ok'})}}
 async function seed(){ // hanya dipanggil saat IS_PREVIEW === true (data di memori)
- const h=async p=>{const salt=rnd();return{salt,iter:100000,passwordHash:await hashPw(p,salt,100000)}};
  const d1=new Date(Date.now()-864e5),d2=new Date(Date.now()-2*864e5),rg=(d,n,hd,tl)=>({tanggal:ds(d),bulan:ds(d).slice(0,7),tot:n,c:{hadir:hd,terlambat:tl,izin:0,sakit:0,dispensasi:0},k:{k1:{n,hadir:hd,terlambat:tl,izin:0,sakit:0,dispensasi:0}}});
  await DB.set('settings','school',{namaSekolah:'SMK Contoh Nusantara',singkatan:'SCN',kota:'Sukoharjo',alamat:'Jl. Pendidikan No. 1',kepsek:'Drs. Contoh Kepala',nipKepsek:'196501011990031001'});
- await DB.set('users','1980',{role:'piket',username:'1980',nama:'Budi Santoso',aktif:true,...await h('piket123')});
- await DB.set('users','1981',{role:'walikelas',username:'1981',nama:'Sri Wahyuni',aktif:true,...await h('wali123')});
- await DB.set('kelas','k1',{nama:'X TKJ 1',tingkat:'X',waliKelasId:'1981'});
+ await DB.set('users','guru.piket@contoh.sch.id',{nip:'1980',nama:'Budi Santoso',email:'guru.piket@contoh.sch.id',role:'piket',aktif:true});
+ await DB.set('users','wali.kelas@contoh.sch.id',{nip:'1981',nama:'Sri Wahyuni',email:'wali.kelas@contoh.sch.id',role:'walikelas',aktif:true});
+ await DB.set('nipEmail','1980',{email:'guru.piket@contoh.sch.id'});await DB.set('nipEmail','1981',{email:'wali.kelas@contoh.sch.id'});
+ await DB.set('kelas','k1',{nama:'X TKJ 1',tingkat:'X',waliKelasId:'wali.kelas@contoh.sch.id'});
  await DB.set('siswa','1001',{nisn:'1001',kodeQr:'1001',nama:'Ahmad Fauzi',kelasId:'k1',jk:'L',aktif:true,tglMasuk:'2026-07-01'});
  await DB.set('siswa','1002',{nisn:'1002',kodeQr:'1002',nama:'Siti Aulia',kelasId:'k1',jk:'P',aktif:true,tglMasuk:'2026-07-01'});
  await DB.set('ringkasan',ds(d1),rg(d1,2,2,0));await DB.set('ringkasan',ds(d2),rg(d2,2,1,1));
@@ -307,35 +385,52 @@ const offDay=s=>{const c=cfg(),o=SCH[s]||LEG[s];if(o)return o.t=='x'?null:o;
 // ===== Login =====
 const err=m=>$('#lerr').textContent=m;
 A.tab=t=>{$('#lt').value=t;$('#tg').classList.toggle('on',t=='g');$('#ta').classList.toggle('on',t=='a');$('#llu').textContent=t=='a'?'Email admin':'NIP';$('#lu').placeholder=t=='a'?'Masukkan email admin':'Masukkan NIP';$('#lu').value='';$('#lp').value='';err('')};
+const mask=e=>{const[a,b]=String(e).split('@');return a.slice(0,1)+'***'+(a.length>2?a.slice(-1):'')+'@'+b};
+const isAdm=async()=>{try{await DB.get('adminProbe','x');return true}catch(e){return false}};
 A.login=async()=>{const u=$('#lu').value.trim(),p=$('#lp').value;err('');if(!DB)return err('Database belum siap.');
  if(Date.now()<lockUntil)return err('Terlalu banyak percobaan. Coba lagi dalam '+Math.ceil((lockUntil-Date.now())/1000)+' detik.');
- const b=$('#lbtn');b.disabled=true;
- try{if($('#lt').value=='a'){if(IS_PREVIEW){if(u!='admin@sakti.sch'||p!='admin123')throw 0}else await DB.auth(u,p);me={role:'admin',nama:'Administrator',id:'admin'}}
- else{if(!window.crypto?.subtle)return err('Login guru memerlukan HTTPS. Buka aplikasi lewat alamat https://.');
-  if(!okId(u))throw 0;const r=await DB.get('users',u);
-  if(!r||r.aktif===false||!['piket','walikelas'].includes(r.role)||await hashPw(p,r.salt,r.iter)!=r.passwordHash)throw 0;me={id:String(r.id),role:r.role,nama:r.nama}}}
+ const b=$('#lbtn'),adm=$('#lt').value=='a';b.disabled=true;
+ try{if(adm){if(IS_PREVIEW){if(u!='admin@sakti.sch'||p!='admin123')throw 0}else{await DB.signIn(u.toLowerCase(),p);if(!await isAdm()){await DB.fresh();throw{code:'notadmin'}}}me={role:'admin',nama:'Administrator',id:'admin'}}
+ else{if(!okId(u))throw 0;const em=await DB.lookupNip(u);if(!em)throw 0;await DB.signIn(em,p);const r=await DB.get('users',em);
+  if(!r||r.aktif===false||!['piket','walikelas'].includes(r.role)){await DB.fresh();throw{code:'inactive'}}
+  me={id:r.id,nip:r.nip||u,role:r.role,nama:r.nama,email:r.email||em}}}
  catch(e){const c=String(e?.code||'');b.disabled=false;
-  if(c=='permission-denied')return err('Akses ditolak oleh Security Rules. Pastikan Anonymous Auth aktif dan rules sudah dipasang.');
+  if(c=='permission-denied')return err('Akses ditolak oleh Security Rules. Pastikan Anonymous Auth aktif dan rules terbaru sudah dipasang.');
+  if(c=='inactive')return err('Akun Anda belum terdaftar atau dinonaktifkan. Hubungi admin sekolah.');
+  if(c=='notadmin')return err('Akun ini bukan admin. Guru masuk lewat tab Guru.');
   if(c=='auth/network-request-failed'||c=='unavailable')return err('Tidak ada koneksi internet.');
-  fails++;if(fails>=5){lockUntil=Date.now()+30000;fails=0}return err('Login gagal. Periksa '+($('#lt').value=='a'?'email':'NIP')+' dan password.')}
+  if(c=='auth/too-many-requests')return err('Terlalu banyak percobaan. Tunggu beberapa menit atau pakai "Lupa password?".');
+  if(c=='auth/operation-not-allowed')return err('Metode Email/Password belum diaktifkan di Firebase Authentication.');
+  fails++;if(fails>=5){lockUntil=Date.now()+30000;fails=0}return err('Login gagal. Periksa '+(adm?'email':'NIP')+' dan password.')}
  b.disabled=false;fails=0;start()};
+let rsT=0;
+A.lupa=()=>{const adm=$('#lt').value=='a';modal(`<h3>Lupa password</h3><p style="margin:8px 0;color:var(--m)">${adm?'Masukkan email admin. Tautan reset dikirim ke email tersebut.':'Masukkan NIP Anda. Tautan untuk membuat password baru dikirim ke email yang terdaftar di sekolah.'}</p><label for="lpu">${adm?'Email admin':'NIP'}</label><input id="lpu" autocomplete="off" onkeydown="if(event.key=='Enter')A.lupa2()"><div class="row" style="margin-top:16px"><button class="btn" onclick="A.X()">Batal</button><button class="btn p" id="lpb" onclick="A.lupa2()">Kirim tautan</button></div><div id="lpm" class="chip" role="status"></div>`)};
+A.lupa2=async()=>{const adm=$('#lt').value=='a',u=$('#lpu').value.trim(),m=$('#lpm'),b=$('#lpb');
+ if(Date.now()<rsT)return m.textContent='Tunggu '+Math.ceil((rsT-Date.now())/1000)+' detik sebelum mengirim lagi.';
+ if(!u)return m.textContent=adm?'Isi email admin.':'Isi NIP Anda.';b.disabled=true;
+ try{let em;if(adm){if(!/^\S+@\S+\.\S+$/.test(u))throw{code:'fmt'};em=u.toLowerCase()}else{if(!okId(u))throw{code:'fmt'};em=await DB.lookupNip(u)}
+  if(!em){m.textContent='NIP tidak ditemukan. Hubungi admin sekolah.';b.disabled=false;return}
+  await DB.resetMail(em);rsT=Date.now()+60000;
+  m.innerHTML=adm?'Jika email terdaftar, tautan reset sudah dikirim. Cek juga folder Spam.':`Tautan dikirim ke <b>${H(mask(em))}</b>. Cek kotak masuk dan folder Spam.`+(IS_PREVIEW?' <small>(Mode preview: email tidak benar-benar dikirim.)</small>':'')}
+ catch(e){m.textContent=e?.code=='fmt'?'Format tidak valid.':e?.code=='auth/too-many-requests'?'Terlalu banyak permintaan. Coba lagi nanti.':'Gagal mengirim. Periksa koneksi lalu coba lagi.'}
+ b.disabled=false};
 A.out=async()=>{await stopCam();try{await DB.out?.()}catch{}location.reload()};
 
 // ===== Navigasi =====
-const NAV={admin:[['dash','dash','Dashboard'],['scan','scan','Scanner'],['abs','list','Absensi'],['man','edit','Absen Manual'],['siswa','cap','Siswa'],['users','users','Guru'],['kelas','school','Kelas'],['rekap','chart','Rekap'],['kal','cal','Kalender'],['bk','db','Backup & Data'],['set','set','Pengaturan']],
- piket:[['dash','dash','Dashboard'],['scan','scan','Scanner'],['man','edit','Absen Manual'],['abs','list','Absensi'],['kal','cal','Kalender'],['akun','key','Akun Saya']],
+const NAV={admin:[['dash','dash','Dashboard'],['scan','scan','Scanner'],['abs','list','Absensi'],['man','edit','Absen Manual'],['wa','wa','Kabari Orang Tua'],['siswa','cap','Siswa'],['users','users','Guru'],['kelas','school','Kelas'],['rekap','chart','Rekap'],['kal','cal','Kalender'],['bk','db','Backup & Data'],['set','set','Pengaturan']],
+ piket:[['dash','dash','Dashboard'],['scan','scan','Scanner'],['man','edit','Absen Manual'],['abs','list','Absensi'],['wa','wa','Kabari Orang Tua'],['kal','cal','Kalender'],['akun','key','Akun Saya']],
  walikelas:[['rekap','chart','Rekap Kelas'],['kal','cal','Kalender'],['akun','key','Akun Saya']]};
 function start(){$('#lg').style.display='none';$('#app').style.display='flex';const n=NAV[me.role];
  $('#nv').innerHTML=n.map(([k,i,l])=>`<button class="ni" data-p="${k}" onclick="A.go('${k}')">${ico(i)}${l}</button>`).join('');
  const b=n.length>5?n.slice(0,4):n;$('#bn').innerHTML=b.map(([k,i,l])=>`<button class="ni" data-p="${k}" onclick="A.go('${k}')">${ico(i)}<span>${l.split(' ')[0]}</span></button>`).join('')+(n.length>5?`<button class="ni" onclick="A.more()">${ico('more')}<span>Lainnya</span></button>`:'');
- $('#who').textContent=me.nama;LD.clear();
+ $('#who').innerHTML=`<span class="av">${H((me.nama||'?').trim().charAt(0).toUpperCase())}</span><span><b>${H(me.nama)}</b><small>${me.role=='admin'?'Administrator':me.role=='piket'?'Guru Piket':'Wali Kelas'}</small></span>`;LD.clear();
  ['settings','siswa','kelas','libur','liburSekolah'].forEach(c=>unsubs.push(DB.sub(c,d=>{S[c]=d;LD.add(c);if(c=='settings'||c=='libur'||c=='liburSekolah'){rebuildHol();if(c=='settings')applyBrand()}refresh()})));
  if(me.role=='admin')unsubs.push(DB.sub('users',d=>{S.users=d;refresh()}));
  if(me.role!='walikelas')subAbs();
  QS.all().then(x=>{QC=x;qUI();flushQ()}).catch(()=>{});
  A.go(n[0][0])}
 A.more=()=>modal('<h3>Menu</h3>'+NAV[me.role].slice(4).map(([k,i,l])=>`<button class="btn w" style="margin-top:8px" onclick="A.X();A.go('${k}')">${ico(i)} ${l}</button>`).join('')+`<button class="btn w d" style="margin-top:8px" onclick="A.out()">Keluar</button>`);
-const subAbs=()=>{abU?.();abU=DB.sub('absensi',d=>{S.absensi=d;refresh();syncRg()},[['tanggal','==',curDay]])};
+let wlU=null;const subAbs=()=>{abU?.();abU=DB.sub('absensi',d=>{S.absensi=d;refresh();syncRg()},[['tanggal','==',curDay]]);wlU?.();wlU=DB.sub('waLog',d=>{S.waLog=d;refresh()},[['tanggal','==',curDay]])};
 const refresh=()=>{clearTimeout(rt);rt=setTimeout(()=>{if(!page)return;const p=PG[page];if(p.up)p.up();else if(p.live)draw();else if(page=='scan')updScan();else if(page=='man')mUp()},80)};
 const stopCam=async()=>{const c=camera;camera=null;if(!c)return;try{await c.stop()}catch{}try{c.clear()}catch{}};
 A.go=async p=>{if(page=='scan'&&p!='scan'){await stopCam();clearInterval(gpsT)}page=p;document.querySelectorAll('[data-p]').forEach(e=>e.classList.toggle('on',e.dataset.p==p));$('#ttl').textContent=PG[p].t;scrollTo(0,0);const ct=$('#ct');ct.classList.remove('pgin');void ct.offsetWidth;ct.classList.add('pgin');clearTimeout(A.pt);A.pt=setTimeout(()=>ct.classList.remove('pgin'),900);draw()};
@@ -357,14 +452,14 @@ function buildRg(){const{a,m,c}=sum(),k={};a.forEach(s=>{const id=s.kelasId||'_'
 let rgSig='',rgT;
 function syncRg(){clearTimeout(rgT);if(!me||me.role=='walikelas'||!ready())return;rgT=setTimeout(async()=>{if(!S.absensi.length)return;const o=buildRg(),sig=JSON.stringify(o);if(sig==rgSig)return;try{await DB.set('ringkasan',curDay,{...o,upd:DB.ts()});rgSig=sig}catch{}},15000)}
 // Grafik garis SVG: satu seri, sumbu 0-100%
-function lineChart(pts,lbl){if(!pts.length)return'<p class="empty">Belum ada data tren</p>';const W=640,Hh=220,L=40,R=16,T=18,B=30,w=W-L-R,h=Hh-T-B,xs=i=>L+(pts.length==1?w/2:i*w/(pts.length-1)),ys=v=>T+h-v/100*h,step=Math.ceil(pts.length/7);
+function lineChart(pts,lbl,nd){if(!pts.length)return'<p class="empty">Belum ada data tren</p>';const W=640,Hh=220,L=40,R=16,T=18,B=30,w=W-L-R,h=Hh-T-B,xs=i=>L+(pts.length==1?w/2:i*w/(pts.length-1)),ys=v=>T+h-v/100*h,step=Math.ceil(pts.length/7);
  const path=pts.map((p,i)=>(i?'L':'M')+xs(i).toFixed(1)+' '+ys(p.y).toFixed(1)).join(' '),area=path+` L${xs(pts.length-1).toFixed(1)} ${ys(0)} L${xs(0).toFixed(1)} ${ys(0)} Z`;
  return`<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="${H(lbl)}"><defs><linearGradient id="tg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--c1)" stop-opacity=".28"/><stop offset="1" stop-color="var(--c1)" stop-opacity="0"/></linearGradient></defs>`
  +[0,50,100].map(g=>`<line x1="${L}" x2="${W-R}" y1="${ys(g)}" y2="${ys(g)}" stroke="#DCE8F5" stroke-width="1"/><text x="${L-6}" y="${ys(g)+4}" text-anchor="end" font-size="11" fill="#5B7090">${g}%</text>`).join('')
  +`<path d="${area}" fill="url(#tg1)"/><path d="${path}" fill="none" stroke="var(--c1)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`
  +pts.map((p,i)=>`<circle cx="${xs(i).toFixed(1)}" cy="${ys(p.y).toFixed(1)}" r="4" fill="var(--c1)" stroke="#fff" stroke-width="2"/><circle cx="${xs(i).toFixed(1)}" cy="${ys(p.y).toFixed(1)}" r="13" fill="transparent"><title>${H(p.tip)}</title></circle>${i%step==0||i==pts.length-1?`<text x="${xs(i).toFixed(1)}" y="${Hh-8}" text-anchor="middle" font-size="11" fill="#5B7090">${+p.x.slice(8)}/${+p.x.slice(5,7)}</text>`:''}`).join('')
  +`<text x="${Math.min(xs(pts.length-1),W-R-10).toFixed(1)}" y="${ys(pts[pts.length-1].y)-10}" text-anchor="end" font-size="12" font-weight="700" fill="#0B1F3A">${pts[pts.length-1].y}%</text></svg>`
- +`<details><summary>Lihat sebagai tabel</summary>${tbl(['Tanggal','% Hadir'],pts.map(p=>[H(p.x),p.y+'%']))}</details>`}
+ +(nd?'':`<details><summary>Lihat sebagai tabel</summary>${tbl(['Tanggal','% Hadir'],pts.map(p=>[H(p.x),p.y+'%']))}</details>`)}
 // Lingkaran persentase (SVG)
 const ring=(c,tot)=>{const R=54,C=2*Math.PI*R;let off=0;
  const segs=['hadir','terlambat','dispensasi','izin','sakit'].map(k=>{const len=tot?c[k]/tot*C:0;const s=len>0?`<circle cx="70" cy="70" r="${R}" fill="none" stroke="${ST[k][1]}" stroke-width="16" stroke-dasharray="${len} ${C-len}" stroke-dashoffset="${-off}" transform="rotate(-90 70 70)"/>`:'';off+=len;return s}).join('');
@@ -453,26 +548,34 @@ A.sc=async code=>{code=String(code).trim();if(!code||(last.c==code&&Date.now()-l
 // ===== CRUD generik =====
 const jkOpt=()=>[['L','Laki-laki'],['P','Perempuan']];
 const CR={
- siswa:{f:[['nisn','NISN'],['nama','Nama lengkap'],['kodeQr','Kode QR (kosong = NISN)'],['kelasId','Kelas','select',kOpts],['jk','Jenis kelamin','select',jkOpt],['tglMasuk','Tanggal terdaftar (kosong = dihitung sejak awal)','date'],['aktif','Status','select',()=>[['1','Aktif'],['0','Nonaktif']]]],
+ siswa:{f:[['nisn','NISN'],['nama','Nama lengkap'],['kodeQr','Kode QR (kosong = NISN)'],['kelasId','Kelas','select',kOpts],['jk','Jenis kelamin','select',jkOpt],['hpOrtu','No. WhatsApp orang tua (contoh 08123456789)','tel'],['tglMasuk','Tanggal terdaftar (kosong = dihitung sejak awal)','date'],['aktif','Status','select',()=>[['1','Aktif'],['0','Nonaktif']]]],
   pre:r=>({...r,aktif:r.aktif===false?'0':'1',kelasId:r.kelasId??fk}),
   save:async(v,r)=>{if(!okId(v.nisn)||!v.nama)throw'NISN (huruf/angka) dan nama wajib diisi';const id=r?.id||v.nisn,code=v.kodeQr||v.nisn;
-   if(!okId(code))throw'Kode QR hanya boleh huruf/angka';if(!v.kelasId)throw'Pilih kelas lebih dulu (tambahkan kelas bila belum ada)';
+   if(!okId(code))throw'Kode QR hanya boleh huruf/angka';const hp=v.hpOrtu?hpNorm(v.hpOrtu):'';if(v.hpOrtu&&!hp)throw'No. WhatsApp tidak valid. Contoh: 08123456789';if(!v.kelasId)throw'Pilih kelas lebih dulu (tambahkan kelas bila belum ada)';
    if(!r&&S.siswa.some(x=>x.id==id))throw'NISN sudah terdaftar';
    if(S.siswa.some(x=>x.id!=id&&String(x.kodeQr||x.nisn)==code))throw'Kode QR sudah dipakai siswa lain';
-   await DB.set('siswa',id,{nisn:id,nama:v.nama,kelasId:v.kelasId,jk:v.jk,kodeQr:code,aktif:v.aktif=='1',tglMasuk:v.tglMasuk||(r?'':today()),...(v.aktif=='1'?{status:''}:{})})}},
- users:{f:[['username','NIP'],['nama','Nama lengkap'],['role','Peran','select',()=>[['piket','Guru Piket'],['walikelas','Wali Kelas']]],['password','Password (kosong = tidak diubah)','password'],['aktif','Status','select',()=>[['1','Aktif'],['0','Nonaktif']]]],
-  pre:r=>({...r,aktif:r.aktif===false?'0':'1',password:''}),
-  save:async(v,r)=>{const id=r?.id||v.username;if(!okId(id))throw'NIP hanya boleh huruf, angka, - dan _';if(!v.nama)throw'Nama wajib diisi';
-   if(!r&&S.users.some(u=>u.id==id))throw'NIP sudah terdaftar';
-   const o={role:v.role,username:id,nama:v.nama,aktif:v.aktif=='1'};
-   if(v.password){if(v.password.length<6)throw'Password minimal 6 karakter';o.salt=rnd();o.iter=100000;o.passwordHash=await hashPw(v.password,o.salt,o.iter)}else if(!r||!r.iter)throw'Password wajib diisi';
-   await DB.set('users',id,o)}},
+   await DB.set('siswa',id,{nisn:id,nama:v.nama,kelasId:v.kelasId,jk:v.jk,kodeQr:code,hpOrtu:hp,aktif:v.aktif=='1',tglMasuk:v.tglMasuk||(r?'':today()),...(v.aktif=='1'?{status:''}:{})})}},
+ users:{f:[['nip','NIP'],['nama','Nama lengkap'],['email','Email aktif (untuk membuat & reset password)','email'],['role','Peran','select',()=>[['piket','Guru Piket'],['walikelas','Wali Kelas']]],['aktif','Status','select',()=>[['1','Aktif'],['0','Nonaktif']]]],
+  pre:r=>({...r,nip:r.nip||r.username||'',aktif:r.aktif===false?'0':'1'}),
+  save:async(v,r)=>{const old=r&&r.email?r:null,legacy=r&&!r.email?r:S.users.find(u=>!u.email&&String(u.username||u.id)==v.nip),nip=old?old.nip:(r?String(r.username||r.id):v.nip),email=old?old.email:String(v.email).toLowerCase();
+   if(!okId(nip))throw'NIP hanya boleh huruf, angka, - dan _';if(!v.nama)throw'Nama wajib diisi';
+   if(old){await DB.set('users',old.id,{nama:v.nama,role:v.role,aktif:v.aktif=='1'});return}
+   if(!/^\S+@\S+\.\S+$/.test(email))throw'Isi email aktif yang valid';
+   if(S.users.some(u=>u.email&&u.nip==nip))throw'NIP sudah terdaftar';
+   if(S.users.some(u=>u.id==email))throw'Email sudah dipakai guru lain';
+   await DB.createAcct(email);
+   await DB.batch([['users',email,{nip,nama:v.nama,email,role:v.role,aktif:v.aktif=='1'}],['nipEmail',nip,{email}]]);
+   if(legacy)await migrateLegacy(legacy,email);
+   try{await DB.resetMail(email);return IS_PREVIEW?'Akun dibuat (mode preview: email tidak dikirim, password sementara preview123)':'Akun dibuat. Email untuk membuat password dikirim ke '+email}
+   catch{return'Akun dibuat, tetapi email gagal dikirim. Gunakan tombol Reset password.'}}},
  kelas:{f:[['nama','Nama kelas (mis. X TKJ 1)'],['tingkat','Tingkat','select',()=>lv().map(x=>[x,x])],['waliKelasId','Wali kelas','select',()=>[['','- Belum ada -'],...S.users.filter(u=>u.role=='walikelas').map(u=>[u.id,u.nama])]]],
   pre:r=>r,save:async(v,r)=>{if(!v.nama)throw'Nama kelas wajib diisi';if(S.kelas.some(k=>k.id!=r?.id&&norm(k.nama)==norm(v.nama)))throw'Nama kelas sudah ada';await DB.set('kelas',r?.id||'k'+Date.now().toString(36),v)}}};
+async function migrateLegacy(old,newId){const L=S.kelas.filter(k=>k.waliKelasId==old.id);if(L.length)await DB.batch(L.map(k=>['kelas',k.id,{waliKelasId:newId}]));await DB.del('users',old.id)}
+A.rst=id=>{const r=S.users.find(x=>x.id==id);if(!r?.email)return info('Guru belum terdaftar','Guru ini berasal dari versi lama dan belum punya email. Klik Ubah, isi email aktifnya, lalu simpan untuk membuat akun login.');ask('Kirim reset password?',`Tautan untuk membuat password baru akan dikirim ke <b>${H(r.email)}</b>.`,'Kirim',()=>DB.resetMail(r.email))};
 const form=(c,id)=>{const C=CR[c],r=id?S[c].find(x=>x.id==id):null,v=C.pre(r||{});
  modal(`<h3>${r?'Ubah':'Tambah'} data</h3>`+C.f.map(f=>inp('f_',f,v[f[0]])).join('')+'<div class="row" style="margin-top:16px"><button class="btn" onclick="A.X()">Batal</button><button class="btn p" id="sv">Simpan</button></div>');
- if(c=='users'&&r)$('#f_username').disabled=true;if(c=='siswa'&&r)$('#f_nisn').disabled=true;
- $('#sv').onclick=async()=>{const o={};C.f.forEach(([k])=>{const x=$('#f_'+k).value;o[k]=k=='password'?x:x.trim()});const b=$('#sv');b.disabled=true;try{await C.save(o,r);X();toast('Tersimpan')}catch(e){b.disabled=false;toast(typeof e=='string'?e:'Gagal menyimpan: '+errMsg(e))}}};
+ if(c=='users'&&r){$('#f_nip').disabled=true;if(r.email)$('#f_email').disabled=true}if(c=='siswa'&&r)$('#f_nisn').disabled=true;
+ $('#sv').onclick=async()=>{const o={};C.f.forEach(([k])=>{const x=$('#f_'+k).value;o[k]=k=='password'?x:x.trim()});const b=$('#sv');b.disabled=true;try{const m=await C.save(o,r);X();toast(typeof m=='string'?m:'Tersimpan')}catch(e){b.disabled=false;toast(typeof e=='string'?e:'Gagal menyimpan: '+errMsg(e))}}};
 A.ad=c=>form(c);A.ed=(c,id)=>form(c,id);
 A.del=(c,id)=>{const r=S[c].find(x=>x.id==id);if(!r)return toast('Data tidak ditemukan');
  if(c=='kelas'){const n=S.siswa.filter(s=>s.kelasId==id).length;
@@ -480,8 +583,8 @@ A.del=(c,id)=>{const r=S[c].find(x=>x.id==id);if(!r)return toast('Data tidak dit
   return ask('Hapus kelas?',`Kelas <b>${H(r.nama)}</b> akan dihapus permanen.`,'Hapus',()=>DB.del('kelas',id))}
  if(c=='siswa')return ask('Hapus siswa?',`<b>${H(r.nama)}</b> (NISN ${H(r.nisn)}) akan dihapus permanen.`,'Hapus',async()=>{
   if($('#dh')?.checked)await delAbs([id]);await DB.del('siswa',id);ms.delete(id)},'<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="dh" checked style="width:auto"> Hapus juga riwayat absensi siswa ini</label>');
- if(c=='users')return ask('Hapus guru?',`Akun <b>${H(r.nama)}</b> (NIP ${H(r.username||r.id)}) akan dihapus dan tidak bisa login lagi.`,'Hapus',async()=>{
-  const L=S.kelas.filter(k=>k.waliKelasId==id);if(L.length)await DB.batch(L.map(k=>['kelas',k.id,{waliKelasId:''}]));await DB.del('users',id)})};
+ if(c=='users')return ask('Hapus guru?',`Akses <b>${H(r.nama)}</b> (NIP ${H(r.nip||r.username||r.id)}) akan dicabut dan tidak bisa login lagi. Akun di Firebase Authentication tidak ikut terhapus, tetapi tanpa data guru ini akun itu tidak punya akses apa pun (bisa dibersihkan di konsol Firebase).`,'Hapus',async()=>{
+  const L=S.kelas.filter(k=>k.waliKelasId==id);if(L.length)await DB.batch(L.map(k=>['kelas',k.id,{waliKelasId:''}]));await DB.del('users',id);const n=r.nip||(!r.email?r.username:'');if(n)try{await DB.del('nipEmail',String(n))}catch{}})};
 const act=(c,id)=>`<button class="btn s" onclick="A.ed('${c}',${J(id)})">Ubah</button> <button class="btn s d" onclick="A.del('${c}',${J(id)})">Hapus</button>`;
 const delAbs=async ids=>{for(const g of chunks(ids,10)){const gs=await Promise.all(g.map(id=>DB.q('absensi',[['siswaId','==',id]])));const all=gs.flat().map(x=>x.id);if(all.length)await DB.delMany('absensi',all)}};
 A.fk=v=>{fk=v;PG.siswa.up()};A.fs=v=>{fs=v;PG.siswa.up()};
@@ -539,24 +642,24 @@ A.pick=()=>$('#fi').click();
 A.exm=()=>modal(`<h3>Export Excel</h3><label for="ek">Kelas</label><select id="ek"><option value="">Semua kelas</option>${sel(kOpts(),fk)}</select><label for="es">Status</label><select id="es">${sel([['','Semua'],['1','Aktif'],['0','Nonaktif'],['lulus','Lulus']],'')}</select><div class="row" style="margin-top:16px"><button class="btn" onclick="A.X()">Batal</button><button class="btn p" onclick="A.ex()">Export</button></div>`);
 A.ex=()=>{if(!need())return;const k=$('#ek').value,s=$('#es').value,L=S.siswa.filter(x=>(!k||x.kelasId==k)&&(!s||(s=='lulus'?isLulus(x):s=='1'?x.aktif!==false:x.aktif===false&&!isLulus(x))));if(!L.length)return toast('Tidak ada data untuk diexport');
  const nm=id=>S.kelas.find(x=>x.id==id)?.nama||'-';
- const ws=XLSX.utils.aoa_to_sheet([['No','NISN','Kode QR','Nama','JK','Kelas','Status'],...L.map((x,i)=>[i+1,String(x.nisn),String(x.kodeQr||x.nisn),x.nama,x.jk=='P'?'P':'L',nm(x.kelasId),sLbl(x)])]);
+ const ws=XLSX.utils.aoa_to_sheet([['No','NISN','Kode QR','Nama','JK','Kelas','Status','No WA Orang Tua'],...L.map((x,i)=>[i+1,String(x.nisn),String(x.kodeQr||x.nisn),x.nama,x.jk=='P'?'P':'L',nm(x.kelasId),sLbl(x),String(x.hpOrtu||'')])]);
  ws['!cols']=[{wch:5},{wch:14},{wch:14},{wch:30},{wch:6},{wch:14},{wch:10}];
  const per={};L.forEach(x=>per[nm(x.kelasId)]=(per[nm(x.kelasId)]||0)+1);
  const w2=XLSX.utils.aoa_to_sheet([['Sekolah',cfg().namaSekolah],['Tahun Ajaran',cfg().tahunAjaran],['Tanggal Export',today()],['Total Siswa',L.length],[],['Kelas','Jumlah'],...Object.entries(per)]);
  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Data Siswa');XLSX.utils.book_append_sheet(wb,w2,'Ringkasan');XLSX.writeFile(wb,`Data-Siswa_${fname(cfg().singkatan||cfg().namaSekolah)}_${today()}.xlsx`);X()};
-A.tpl=()=>{if(!need())return;const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet([['NISN','Nama','Kelas','JK','Kode QR'],['1003','Contoh Siswa',lv()[0]+' A','L','']]),'Siswa');XLSX.writeFile(wb,'Template-Siswa.xlsx')};
+A.tpl=()=>{if(!need())return;const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet([['NISN','Nama','Kelas','JK','Kode QR','No WA Orang Tua'],['1003','Contoh Siswa',lv()[0]+' A','L','','08123456789']]),'Siswa');XLSX.writeFile(wb,'Template-Siswa.xlsx')};
 let IMP=null;
 const gv=(r,...ks)=>{for(const x in r)if(ks.includes(String(x).trim().toLowerCase()))return String(r[x]??'').trim();return''};
 A.imp=async f=>{if(!f||!need())return;
  try{const wb=XLSX.read(await f.arrayBuffer()),rs=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:'',raw:false}),ok=[],bad=[],seen=new Set(),codes=new Set();
-  rs.forEach((r,i)=>{const nisn=gv(r,'nisn'),nama=gv(r,'nama'),kl=gv(r,'kelas'),jk=gv(r,'jk','jenis kelamin'),qr=gv(r,'kode qr'),row=i+2;
+  rs.forEach((r,i)=>{const nisn=gv(r,'nisn'),nama=gv(r,'nama'),kl=gv(r,'kelas'),jk=gv(r,'jk','jenis kelamin'),qr=gv(r,'kode qr'),hpR=gv(r,'no wa orang tua','no wa','wa','hp','no hp orang tua','whatsapp'),hp=hpNorm(hpR),row=i+2;
    if(!nisn&&!nama&&!kl)return;
    if(!okId(nisn))return bad.push([row,'NISN kosong atau mengandung karakter tidak valid']);
    if(!nama)return bad.push([row,'Nama kosong']);
    if(seen.has(nisn))return bad.push([row,'NISN ganda di dalam file']);
-   if(qr&&!okId(qr))return bad.push([row,'Kode QR tidak valid']);
+   if(qr&&!okId(qr))return bad.push([row,'Kode QR tidak valid']);if(hpR&&!hp)return bad.push([row,'No WA orang tua tidak valid ('+hpR+')']);
    const code=qr||nisn;if(codes.has(code)||S.siswa.some(s=>s.id!=nisn&&String(s.kodeQr||s.nisn)==code))return bad.push([row,'Kode QR '+code+' sudah dipakai siswa lain']);
-   seen.add(nisn);codes.add(code);ok.push({nisn,nama,kelas:kl,jk:jk?(/^p/i.test(jk)?'P':'L'):'',qr})});
+   seen.add(nisn);codes.add(code);ok.push({nisn,nama,kelas:kl,jk:jk?(/^p/i.test(jk)?'P':'L'):'',qr,hp})});
   if(!ok.length&&!bad.length)return toast('File kosong atau kolom tidak sesuai template');
   IMP=ok;const nk=[...new Set(ok.map(x=>x.kelas).filter(x=>x&&!S.kelas.some(k=>k.nama==x)))],upd=ok.filter(x=>S.siswa.some(s=>s.id==x.nisn)).length;
   modal(`<h3>Pratinjau impor</h3><div class="fi"><span>Siswa valid</span><b>${ok.length}</b></div><div class="fi"><span>Siswa baru</span><b>${ok.length-upd}</b></div><div class="fi"><span>Diperbarui (NISN sudah ada)</span><b>${upd}</b></div><div class="fi"><span>Kelas baru dibuat</span><b>${nk.length}</b></div>${nk.length?`<small>${nk.map(H).join(', ')}</small>`:''}<div class="fi"><span>Baris dilewati</span><b>${bad.length}</b></div>${bad.slice(0,10).map(b=>`<small style="display:block;color:#991B1B">Baris ${b[0]}: ${H(b[1])}</small>`).join('')}${bad.length>10?`<small>+${bad.length-10} baris lainnya</small>`:''}<small style="display:block;margin-top:8px">Siswa yang sudah ada hanya diperbarui pada kolom yang terisi; status aktif/lulus tidak diubah.</small><div class="row" style="margin-top:16px"><button class="btn" onclick="A.X()">Batal</button><button class="btn p" id="ig" ${ok.length?'':'disabled'} onclick="A.ig()">Impor ${ok.length} siswa</button></div>`)}
@@ -564,8 +667,8 @@ A.imp=async f=>{if(!f||!need())return;
 A.ig=async()=>{const b=$('#ig');if(!IMP||!b)return;b.disabled=true;b.textContent='Menyimpan…';const km={},ops=[];let n=0;S.kelas.forEach(k=>km[k.nama]=k.id);
  for(const x of IMP)if(x.kelas&&!km[x.kelas]){const id='k'+Date.now().toString(36)+(n++),l=lvl(x.kelas);km[x.kelas]=id;ops.push(['kelas',id,{nama:x.kelas,tingkat:l?l.t:lv()[0],waliKelasId:''}])}
  IMP.forEach(x=>{const old=S.siswa.find(s=>s.id==x.nisn);
-  if(old)ops.push(['siswa',x.nisn,{nama:x.nama,...(x.kelas?{kelasId:km[x.kelas]}:{}),...(x.jk?{jk:x.jk}:{}),...(x.qr?{kodeQr:x.qr}:{})}]);
-  else ops.push(['siswa',x.nisn,{nisn:x.nisn,kodeQr:x.qr||x.nisn,nama:x.nama,kelasId:x.kelas?km[x.kelas]:'',jk:x.jk||'L',aktif:true,status:'',tglMasuk:today()}])});
+  if(old)ops.push(['siswa',x.nisn,{nama:x.nama,...(x.kelas?{kelasId:km[x.kelas]}:{}),...(x.jk?{jk:x.jk}:{}),...(x.qr?{kodeQr:x.qr}:{}),...(x.hp?{hpOrtu:x.hp}:{})}]);
+  else ops.push(['siswa',x.nisn,{nisn:x.nisn,kodeQr:x.qr||x.nisn,nama:x.nama,kelasId:x.kelas?km[x.kelas]:'',jk:x.jk||'L',hpOrtu:x.hp||'',aktif:true,status:'',tglMasuk:today()}])});
  try{await DB.batch(ops);const t=IMP.length;IMP=null;X();toast(t+' siswa diimpor')}catch(e){b.disabled=false;b.textContent='Coba lagi';toast('Gagal menyimpan impor')}};
 
 // ===== Generate QR Code (PNG) =====
@@ -619,40 +722,46 @@ A.msv=async()=>{const k=$('#mst').value,ket=$('#mkt').value.trim().slice(0,200),
   toast(`Tersimpan: ${ms.size} siswa, ${days.length} hari`+(days.some(t=>t!=curDay)?' (ringkasan harian hari lain diperbarui lewat menu Backup & Data)':''));ms.clear();mUp()}
  catch{toast('Gagal menyimpan. Periksa koneksi lalu coba lagi.')}};
 
-// ===== Impor guru massal (Excel/CSV) =====
+// ===== Impor guru massal (Excel/CSV): akun dibuat di Firebase Auth, guru membuat password lewat email =====
 let IMPG=null;
-A.tplg=()=>{if(!need())return;const wb=XLSX.utils.book_new(),T=v=>({t:'s',v}),
- ws=XLSX.utils.aoa_to_sheet([['NIP','Nama','Peran','Password','Status','Kelas Wali']]);
- [['198001012005011001','Budi Santoso','Guru Piket','piket123','Aktif',''],['198502022010012002','Sri Wahyuni','Wali Kelas','wali1234','Aktif',lv()[0]+' A']].forEach((r,i)=>r.forEach((v,j)=>{ws[XLSX.utils.encode_cell({r:i+1,c:j})]=T(v)}));
- ws['!ref']='A1:F3';ws['!cols']=[{wch:22},{wch:26},{wch:14},{wch:14},{wch:10},{wch:22}];
+A.tplg=()=>{if(!need())return;const wb=XLSX.utils.book_new(),T=v=>({t:'s',v}),ws=XLSX.utils.aoa_to_sheet([['NIP','Nama','Peran','Email','Status','Kelas Wali']]);
+ [['198001012005011001','Budi Santoso','Guru Piket','budi@gmail.com','Aktif',''],['198502022010012002','Sri Wahyuni','Wali Kelas','sri@gmail.com','Aktif',lv()[0]+' A']].forEach((r,i)=>r.forEach((v,j)=>{ws[XLSX.utils.encode_cell({r:i+1,c:j})]=T(v)}));
+ ws['!ref']='A1:F3';ws['!cols']=[{wch:22},{wch:26},{wch:14},{wch:28},{wch:10},{wch:22}];
  XLSX.utils.book_append_sheet(wb,ws,'Guru');
- XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet([['Petunjuk pengisian'],['NIP: huruf/angka tanpa spasi (dipakai untuk login). Format kolom NIP sebagai Teks agar angka panjang tidak berubah.'],['Peran: Guru Piket atau Wali Kelas.'],['Password: minimal 6 karakter. Wajib untuk guru baru. Kosongkan untuk guru yang sudah ada bila password tidak ingin diubah.'],['Status: Aktif atau Nonaktif (kosong = Aktif, atau tidak diubah untuk guru yang sudah ada).'],['Kelas Wali: nama kelas persis seperti di menu Kelas, beberapa kelas dipisah titik koma. Hanya untuk Wali Kelas.'],['Hapus file ini setelah impor karena berisi password.']]),'Petunjuk');
+ XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet([['Petunjuk pengisian'],['NIP: huruf/angka tanpa spasi (dipakai untuk login). Format kolom NIP sebagai Teks.'],['Peran: Guru Piket atau Wali Kelas.'],['Email: email aktif guru. Setelah impor, tiap guru baru menerima email berisi tautan untuk membuat password sendiri. Tidak ada kolom password.'],['Status: Aktif atau Nonaktif (kosong = Aktif, atau tidak diubah untuk guru yang sudah ada).'],['Kelas Wali: nama kelas persis seperti di menu Kelas, beberapa kelas dipisah titik koma. Hanya untuk Wali Kelas.']]),'Petunjuk');
  XLSX.writeFile(wb,'Template-Guru.xlsx')};
 A.impg=async f=>{if(!f||!need())return;
- try{const wb=XLSX.read(await f.arrayBuffer()),rs=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:'',raw:false}),ok=[],bad=[],warn=[],seen=new Set();
-  rs.forEach((r,i)=>{const row=i+2,nip=gv(r,'nip'),nama=gv(r,'nama'),pr=gv(r,'peran'),pw=String(r.Password??r.password??gv(r,'password')),stt=gv(r,'status').toLowerCase(),kw=gv(r,'kelas wali','kelas');
-   if(!nip&&!nama&&!pr)return;
+ try{const wb=XLSX.read(await f.arrayBuffer()),rs=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:'',raw:false}),ok=[],bad=[],warn=[],sn=new Set(),se=new Set();
+  rs.forEach((r,i)=>{const row=i+2,nip=gv(r,'nip'),nama=gv(r,'nama'),pr=gv(r,'peran'),email=gv(r,'email').toLowerCase(),stt=gv(r,'status').toLowerCase(),kw=gv(r,'kelas wali','kelas');
+   if(!nip&&!nama&&!pr&&!email)return;
    if(!okId(nip))return bad.push([row,'NIP kosong atau tidak valid (format kolom NIP sebagai Teks)']);
    if(!nama)return bad.push([row,'Nama kosong']);
    const role=/wali/i.test(pr)?'walikelas':/piket/i.test(pr)?'piket':'';if(!role)return bad.push([row,'Peran harus "Guru Piket" atau "Wali Kelas"']);
-   if(seen.has(nip))return bad.push([row,'NIP ganda di dalam file']);
-   const old=S.users.find(u=>u.id==nip);
-   if(!old&&pw.length<6)return bad.push([row,'Password minimal 6 karakter untuk guru baru']);
-   if(old&&pw&&pw.length<6)return bad.push([row,'Password minimal 6 karakter']);
+   if(!/^\S+@\S+\.\S+$/.test(email))return bad.push([row,'Email kosong atau tidak valid']);
+   if(sn.has(nip))return bad.push([row,'NIP ganda di dalam file']);if(se.has(email))return bad.push([row,'Email ganda di dalam file']);
+   const byNip=S.users.find(u=>u.email&&u.nip==nip),byEm=S.users.find(u=>u.id==email),legacy=S.users.find(u=>!u.email&&String(u.username||u.id)==nip);
+   if(byNip&&byNip.id!=email)return bad.push([row,'NIP sudah terdaftar dengan email lain']);
+   if(byEm&&byEm.nip!=nip)return bad.push([row,'Email sudah dipakai guru lain']);
    const names=kw.split(/[;|]/).map(x=>x.trim()).filter(Boolean),kelas=[];
    if(names.length&&role!='walikelas')warn.push([row,'Kelas Wali diabaikan karena peran bukan Wali Kelas']);
    else names.forEach(n=>{const k=S.kelas.find(x=>norm(x.nama)==norm(n));if(k)kelas.push(k);else warn.push([row,'Kelas "'+n+'" tidak ditemukan, wali tidak dipasang untuk kelas ini'])});
-   seen.add(nip);ok.push({nip,nama,role,pw,aktif:stt?!/^(non|0|tidak|n$)/.test(stt):(old?undefined:true),kelas:role=='walikelas'?kelas:[],isNew:!old})});
+   sn.add(nip);se.add(email);ok.push({nip,nama,role,email,aktif:stt?!/^(non|0|tidak|n$)/.test(stt):undefined,kelas:role=='walikelas'?kelas:[],isNew:!byEm,legacy:!!legacy})});
   if(!ok.length&&!bad.length)return toast('File kosong atau kolom tidak sesuai template');
-  IMPG=ok;const nb=ok.filter(x=>x.isNew).length;
-  modal(`<h3>Pratinjau impor guru</h3><div class="fi"><span>Guru valid</span><b>${ok.length}</b></div><div class="fi"><span>Guru baru</span><b>${nb}</b></div><div class="fi"><span>Diperbarui (NIP sudah ada)</span><b>${ok.length-nb}</b></div><div class="fi"><span>Baris dilewati</span><b>${bad.length}</b></div>${bad.slice(0,10).map(b=>`<small style="display:block;color:#991B1B">Baris ${b[0]}: ${H(b[1])}</small>`).join('')}${bad.length>10?`<small>+${bad.length-10} baris lainnya</small>`:''}${warn.length?`<div class="fi"><span>Peringatan</span><b>${warn.length}</b></div>`:''}${warn.slice(0,6).map(b=>`<small style="display:block;color:#92400E">Baris ${b[0]}: ${H(b[1])}</small>`).join('')}<small style="display:block;margin-top:8px">Password disimpan dalam bentuk hash. Hapus file Excel setelah impor karena berisi password asli.</small><div class="row" style="margin-top:16px"><button class="btn" onclick="A.X()">Batal</button><button class="btn p" id="igg" ${ok.length?'':'disabled'} onclick="A.igg()">Impor ${ok.length} guru</button></div>`)}
+  IMPG=ok;const nb=ok.filter(x=>x.isNew).length,lg=ok.filter(x=>x.legacy).length;
+  modal(`<h3>Pratinjau impor guru</h3><div class="fi"><span>Guru valid</span><b>${ok.length}</b></div><div class="fi"><span>Akun baru (menerima email undangan)</span><b>${nb}</b></div><div class="fi"><span>Diperbarui (email sudah terdaftar)</span><b>${ok.length-nb}</b></div>${lg?`<div class="fi"><span>Migrasi dari versi lama</span><b>${lg}</b></div>`:''}<div class="fi"><span>Baris dilewati</span><b>${bad.length}</b></div>${bad.slice(0,10).map(b=>`<small style="display:block;color:#991B1B">Baris ${b[0]}: ${H(b[1])}</small>`).join('')}${bad.length>10?`<small>+${bad.length-10} baris lainnya</small>`:''}${warn.length?`<div class="fi"><span>Peringatan</span><b>${warn.length}</b></div>`:''}${warn.slice(0,6).map(b=>`<small style="display:block;color:#92400E">Baris ${b[0]}: ${H(b[1])}</small>`).join('')}<small style="display:block;margin-top:8px">Akun dibuat satu per satu dengan jeda singkat, jadi proses beberapa detik per belasan guru. Jangan tutup halaman sampai selesai.</small><div class="row" style="margin-top:16px"><button class="btn" onclick="A.X()">Batal</button><button class="btn p" id="igg" ${ok.length?'':'disabled'} onclick="A.igg()">Impor ${ok.length} guru</button></div>`)}
  catch(e){toast('File tidak bisa dibaca')}};
-A.igg=async()=>{const b=$('#igg');if(!IMPG||!b)return;b.disabled=true;b.textContent='Memproses…';const ops=[];
- try{for(const x of IMPG){const o={role:x.role,username:x.nip,nama:x.nama};if(x.aktif!==undefined)o.aktif=x.aktif;
-   if(x.pw){o.salt=rnd();o.iter=100000;o.passwordHash=await hashPw(x.pw,o.salt,100000)}
-   ops.push(['users',x.nip,o]);x.kelas.forEach(k=>ops.push(['kelas',k.id,{waliKelasId:x.nip}]))}
-  await DB.batch(ops);const t=IMPG.length;IMPG=null;X();toast(t+' guru diimpor')}
- catch(e){b.disabled=false;b.textContent='Coba lagi';toast('Gagal menyimpan impor guru')}};
+A.igg=async()=>{const b=$('#igg');if(!IMPG||!b)return;b.disabled=true;const list=IMPG,okN=[],fail=[];let n=0;
+ for(const x of list){b.textContent=`Memproses ${++n}/${list.length}…`;
+  try{const ex=S.users.find(u=>u.id==x.email),legacy=S.users.find(u=>!u.email&&String(u.username||u.id)==x.nip);let inv=false;
+   if(!ex){await DB.createAcct(x.email);inv=true}
+   const ops=[['users',x.email,{nip:x.nip,nama:x.nama,email:x.email,role:x.role,...(x.aktif!==undefined?{aktif:x.aktif}:ex?{}:{aktif:true})}],['nipEmail',x.nip,{email:x.email}]];
+   x.kelas.forEach(k=>ops.push(['kelas',k.id,{waliKelasId:x.email}]));await DB.batch(ops);
+   if(legacy)await migrateLegacy(legacy,x.email);
+   let mailed=true;if(inv){try{await DB.resetMail(x.email)}catch{mailed=false}}
+   okN.push(x.nip);if(!mailed)fail.push([x.nip,x.nama,'akun dibuat tetapi email gagal dikirim (pakai tombol Reset password)'])}
+  catch(e){const c=e?.code||'';fail.push([x.nip,x.nama,c=='auth/too-many-requests'?'dibatasi Firebase, ulangi beberapa menit lagi':c=='auth/admin-restricted-operation'?'pendaftaran akun dinonaktifkan di Firebase Authentication':'gagal ('+String(c||e?.message||'').slice(0,50)+')']);if(c=='auth/too-many-requests')break}
+  await new Promise(r=>setTimeout(r,400))}
+ IMPG=null;X();info('Hasil impor guru',`<b>${okN.length}</b> guru diproses.`+(fail.length?`<br><br>Perlu perhatian (${fail.length}):<br>`+fail.slice(0,12).map(f=>`<small style="display:block">${H(f[0])} ${H(f[1])}: ${H(f[2])}</small>`).join(''):'<br>Email untuk membuat password sudah dikirim ke guru baru.'))};
 
 // ===== Rekap & riwayat =====
 const mLbl=m=>BLN[+m.slice(5,7)-1]+' '+m.slice(0,4);
@@ -718,7 +827,7 @@ A.rwl=async()=>{const m=$('#rwm')?.value,b=$('#rwb');if(!m||!b)return;b.innerHTM
 
 // ===== Pengaturan (identitas, tampilan, operasional) =====
 const FID=[['appName','Nama aplikasi'],['tagline','Tagline / slogan'],['namaSekolah','Nama sekolah'],['singkatan','Singkatan (tampil di logo bila tanpa gambar)'],['npsn','NPSN'],['alamat','Alamat'],['kota','Kota (untuk tanda tangan rekap)'],['telepon','Telepon'],['email','Email sekolah','email'],['kepsek','Nama kepala sekolah'],['nipKepsek','NIP kepala sekolah'],['footerText','Teks footer / hak cipta']];
-const FOP=[['tahunAjaran','Tahun ajaran (contoh 2026/2027)'],['jenjang','Jenjang sekolah (mengatur tingkat & kenaikan kelas)','select',()=>Object.entries(JENJANG)],['jamMasukBatas','Terlambat setelah jam','time'],['jamPulangMulai','Mulai jam pulang','time'],['hariAktif','Hari aktif (0=Min ... 6=Sab, pisah koma)'],['liburNasional','Libur nasional otomatis','select',()=>[['1','Ikuti'],['0','Abaikan']]],['cutiBersama','Cuti bersama otomatis','select',()=>[['1','Ikuti libur'],['0','Tetap masuk']]],['liburApi','Alamat API libur online (pakai {year} untuk tahun)'],['hariLibur','Lanjutan: libur (YYYY-MM-DD=Nama) / masuk khusus (!YYYY-MM-DD), pisah koma'],['titikAbsen','Titik absen'],['cekGps','Cek GPS scanner','select',()=>[['0','Nonaktif'],['1','Aktif']]],['lat','Latitude sekolah'],['lng','Longitude sekolah'],['radiusM','Radius (meter)','number']];
+const FOP=[['tahunAjaran','Tahun ajaran (contoh 2026/2027)'],['jenjang','Jenjang sekolah (mengatur tingkat & kenaikan kelas)','select',()=>Object.entries(JENJANG)],['jamMasukBatas','Terlambat setelah jam','time'],['jamPulangMulai','Mulai jam pulang','time'],['hariAktif','Hari aktif (0=Min ... 6=Sab, pisah koma)'],['liburNasional','Libur nasional otomatis','select',()=>[['1','Ikuti'],['0','Abaikan']]],['cutiBersama','Cuti bersama otomatis','select',()=>[['1','Ikuti libur'],['0','Tetap masuk']]],['liburApi','Alamat API libur online (pakai {year} untuk tahun)'],['hariLibur','Lanjutan: libur (YYYY-MM-DD=Nama) / masuk khusus (!YYYY-MM-DD), pisah koma'],['titikAbsen','Titik absen'],['alpaJam','Siswa dianggap alpa (dan bisa dikabari) setelah jam','time'],['waIzin','Pesan WhatsApp: izin'],['waSakit','Pesan WhatsApp: sakit'],['waAlpa','Pesan WhatsApp: alpa. Variabel: {nama} {kelas} {tanggal} {sekolah} {keterangan}'],['cekGps','Cek GPS scanner','select',()=>[['0','Nonaktif'],['1','Aktif']]],['lat','Latitude sekolah'],['lng','Longitude sekolah'],['radiusM','Radius (meter)','number']];
 const SKEYS=[...FID,...FOP].map(f=>f[0]);
 A.gps=()=>navigator.geolocation?.getCurrentPosition(p=>{$('#s_lat').value=p.coords.latitude.toFixed(6);$('#s_lng').value=p.coords.longitude.toFixed(6)},()=>toast('Lokasi tidak bisa dibaca'),{enableHighAccuracy:true});
 A.th=k=>{$('#s_tema').value=k;document.querySelectorAll('.sw button').forEach(b=>b.classList.toggle('on',b.dataset.k==k));const t=THEMES[k],r=document.documentElement.style;r.setProperty('--c1',t[1]);r.setProperty('--c2',t[2]);r.setProperty('--c3',t[3]);r.setProperty('--cd',t[4])};
@@ -760,10 +869,10 @@ let cm=new Date();A.cn=d=>{cm=new Date(cm.getFullYear(),cm.getMonth()+d,1);draw(
 // ===== Backup & restore (admin) =====
 const ser=v=>{const d=D(v);if(d)return{__ts:d.getTime()};if(Array.isArray(v))return v.map(ser);if(v&&typeof v=='object')return Object.fromEntries(Object.entries(v).map(([k,x])=>[k,ser(x)]));return v};
 const des=v=>{if(Array.isArray(v))return v.map(des);if(v&&typeof v=='object'){if(Object.keys(v).length==1&&'__ts' in v)return new Date(+v.__ts);return Object.fromEntries(Object.entries(v).map(([k,x])=>[k,des(x)]))}return v};
-const BCOL=['settings','users','kelas','siswa','liburSekolah','libur','ringkasan','absensi','izinManual'];
-A.bkm=()=>modal(`<h3>Backup data</h3><p style="margin:8px 0;color:var(--m)">Berisi pengaturan, akun guru (hash password), kelas, siswa, kalender libur, dan ringkasan harian. Simpan file di tempat aman.</p><label for="bka">Riwayat absensi</label><select id="bka">${sel([['none','Tidak disertakan (hemat kuota)'],['m1','Bulan ini'],['m3','3 bulan terakhir'],['all','Semua (banyak pembacaan)']],'none')}</select><div class="row" style="margin-top:16px"><button class="btn" onclick="A.X()">Batal</button><button class="btn p" id="bkgo" onclick="A.bk()">Unduh backup</button></div>`);
+const BCOL=['settings','users','nipEmail','kelas','siswa','liburSekolah','libur','ringkasan','absensi','izinManual'];
+A.bkm=()=>modal(`<h3>Backup data</h3><p style="margin:8px 0;color:var(--m)">Berisi pengaturan, data guru dan indeks NIP, kelas, siswa, kalender libur, dan ringkasan harian. Simpan file di tempat aman.</p><label for="bka">Riwayat absensi</label><select id="bka">${sel([['none','Tidak disertakan (hemat kuota)'],['m1','Bulan ini'],['m3','3 bulan terakhir'],['all','Semua (banyak pembacaan)']],'none')}</select><div class="row" style="margin-top:16px"><button class="btn" onclick="A.X()">Batal</button><button class="btn p" id="bkgo" onclick="A.bk()">Unduh backup</button></div>`);
 A.bk=async()=>{const b=$('#bkgo'),per=$('#bka').value;b.disabled=true;b.textContent='Membaca data…';
- try{const data={};for(const c of ['settings','users','kelas','siswa','liburSekolah','libur','ringkasan'])data[c]=await DB.all(c);
+ try{const data={};for(const c of ['settings','users','nipEmail','kelas','siswa','liburSekolah','libur','ringkasan'])data[c]=await DB.all(c);
   if(per=='all'){data.absensi=await DB.all('absensi');data.izinManual=await DB.all('izinManual')}
   else if(per!='none'){const n=per=='m1'?1:3,ms_=[];for(let i=0;i<n;i++){const d=new Date(new Date().getFullYear(),new Date().getMonth()-i,1);ms_.push(ds(d).slice(0,7))}data.absensi=await DB.q('absensi',[['bulan','in',ms_]])}
   const j={app:'SAKTI-BACKUP',v:2,at:new Date().toISOString(),sekolah:cfg().namaSekolah,data:ser(data)};
@@ -772,7 +881,7 @@ A.bk=async()=>{const b=$('#bkgo'),per=$('#bka').value;b.disabled=true;b.textCont
 let RS=null;
 A.rsf=async f=>{if(!f)return;if(f.size>25e6)return toast('File terlalu besar (maks 25 MB)');
  try{const j=JSON.parse(await f.text());if(j.app!='SAKTI-BACKUP'||!j.data||typeof j.data!='object')throw 0;const data={};let tot=0;
-  for(const c of BCOL){const L=j.data[c];if(!Array.isArray(L))continue;data[c]=L.filter(x=>x&&typeof x=='object'&&/^[\w.-]{1,120}$/.test(String(x.id)));tot+=data[c].length}
+  for(const c of BCOL){const L=j.data[c];if(!Array.isArray(L))continue;data[c]=L.filter(x=>x&&typeof x=='object'&&/^[\w.@+-]{1,160}$/.test(String(x.id)));tot+=data[c].length}
   if(!tot)throw 0;RS=data;
   ask('Pulihkan data dari backup?',`File backup <b>${H(j.sekolah||'')}</b> tanggal <b>${H(String(j.at||'').slice(0,10))}</b> berisi:<br>${Object.entries(data).map(([c,L])=>`${H(c)}: <b>${L.length}</b>`).join(' · ')}<br><br>Dokumen dengan ID yang sama akan <b>ditimpa</b>. Data lain tidak dihapus.`,'Pulihkan',async()=>{
    const ops=[];for(const[c,L]of Object.entries(RS))L.forEach(x=>{const{id,...v}=x;ops.push([c,String(id),des(v)])});await DB.batch(ops);RS=null},`<label>Ketik <b>RESTORE</b> untuk melanjutkan</label><input id="gt" data-w="RESTORE" autocomplete="off" placeholder="RESTORE">`)}
@@ -789,33 +898,79 @@ A.rgb=()=>{const m=$('#rgm').value;if(!m)return toast('Pilih bulan');ask('Bangun
 A.pw=async()=>{const o=$('#pw0').value,n=$('#pw1').value,n2=$('#pw2').value;
  if(!o)return toast('Isi password lama');if(n.length<6)return toast('Password baru minimal 6 karakter');if(n!=n2)return toast('Konfirmasi password tidak sama');if(n==o)return toast('Password baru harus berbeda dari yang lama');
  const b=$('#pwb');b.disabled=true;
- try{const r=await DB.get('users',me.id);if(!r||await hashPw(o,r.salt,r.iter)!=r.passwordHash){b.disabled=false;return toast('Password lama salah')}
-  const salt=rnd();await DB.set('users',me.id,{salt,iter:100000,passwordHash:await hashPw(n,salt,100000),pwUpdatedAt:DB.ts()});['pw0','pw1','pw2'].forEach(i=>$('#'+i).value='');toast('Password berhasil diganti')}
- catch(e){toast('Gagal mengganti password: '+errMsg(e))}b.disabled=false};
+ try{await DB.changePw(o,n);['pw0','pw1','pw2'].forEach(i=>$('#'+i).value='');toast('Password berhasil diganti')}
+ catch(e){const c=e?.code||'';toast(c=='auth/invalid-credential'||c=='auth/wrong-password'?'Password lama salah':c=='auth/weak-password'?'Password baru terlalu lemah':c=='auth/too-many-requests'?'Terlalu banyak percobaan, coba lagi nanti':'Gagal mengganti password: '+errMsg(e))}
+ b.disabled=false};
 
 // ===== Halaman =====
 let RKA=false;
+// ===== Komponen dashboard =====
+let DT=null,DTl=0,TR=14;
+const pctOf=(c,t)=>t?Math.round(hdr(c)/t*100):0;
+async function loadTrend(){const d=curDay,y=+d.slice(0,4),m=+d.slice(5,7),pm=m==1?(y-1)+'-12':y+'-'+pad(m-1);
+ try{const L=(await Promise.all([d.slice(0,7),pm].map(b=>DB.q('ringkasan',[['bulan','==',b]])))).flat();
+  DT={at:Date.now(),pts:L.filter(r=>r.tot>0&&r.c&&!offDay(r.tanggal)).map(r=>{const v=pctOf(r.c,r.tot);return{x:r.tanggal,y:v,tip:`${r.tanggal}: ${v}% hadir (${hdr(r.c)} dari ${r.tot})`}}).sort((a,b)=>a.x<b.x?-1:1)}}
+ catch{DT={at:Date.now(),pts:[]}}
+ const e=$('#dtr');if(e&&page=='dash')e.innerHTML=trendHtml()}
+function trendHtml(){const{c,tot}=sum();let p=(DT?.pts||[]).filter(x=>x.x!=curDay);
+ if(tot&&S.absensi.length&&!offDay(curDay)){const v=pctOf(c,tot);p.push({x:curDay,y:v,tip:`${curDay}: ${v}% hadir (${hdr(c)} dari ${tot}) · hari ini`})}
+ p=p.slice(-TR);return p.length?lineChart(p,'Tren kehadiran '+TR+' hari terakhir',1):'<p class="empty">Belum ada data tren. Ringkasan harian terbentuk otomatis saat ada absensi.</p>'}
+A.tr=v=>{TR=+v;const e=$('#dtr');if(e)e.innerHTML=trendHtml()};
+const DNK=['hadir','terlambat','dispensasi','izin','sakit','alpa'],DNL=k=>k=='alpa'?'Belum hadir':ST[k][0];
+const donut=(c,tot,bel)=>{const R=62,C=2*Math.PI*R,gap=3;let off=0;
+ const segs=DNK.map(k=>{const v=k=='alpa'?bel:c[k],len=tot?v/tot*C:0,l2=Math.max(0,len-gap),s=len>1?`<circle cx="80" cy="80" r="${R}" fill="none" stroke="${ST[k][1]}" stroke-width="18" stroke-linecap="round" stroke-dasharray="${l2} ${C-l2}" stroke-dashoffset="${-off}" transform="rotate(-90 80 80)"/>`:'';off+=len;return s}).join('');
+ return`<svg class="dn" viewBox="0 0 160 160" role="img" aria-label="Komposisi kehadiran hari ini"><circle cx="80" cy="80" r="${R}" fill="none" stroke="rgba(91,110,245,.1)" stroke-width="18"/>${segs}<text x="80" y="82" text-anchor="middle" font-size="28" font-weight="800" fill="var(--t)">${tot}</text><text x="80" y="100" text-anchor="middle" font-size="11" fill="var(--m)">Siswa aktif</text></svg>`};
+const funnel=(tot,rec,hd,tw)=>{const L=[[tot,'Siswa aktif'],[rec,'Tercatat'],[hd,'Hadir'],[tw,'Tepat waktu']],col=['#5B6EF5','#6CB8F5','#9B7BF0','#F27FBF'],wt=[240,205,170,135],wb=[205,170,135,100];
+ const sv=L.map(([v,l],i)=>{const t=i*50,b=t+46,pts=[[130-wt[i]/2,t],[130+wt[i]/2,t],[130+wb[i]/2,b],[130-wb[i]/2,b]].map(p=>p.join(',')).join(' ');
+  return`<polygon points="${pts}" fill="${col[i]}" stroke="${col[i]}" stroke-width="6" stroke-linejoin="round" opacity=".92"/><text x="130" y="${t+24}" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">${v}</text><text x="130" y="${t+39}" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">${l}</text>`}).join('');
+ return`<div class="fn"><svg viewBox="0 0 260 200" role="img" aria-label="Corong kehadiran">${sv}</svg><div class="fl">${L.map(([v,l])=>`<div><b>${tot?Math.round(v/tot*100):0}%</b><small>${l}</small></div>`).join('')}</div></div>`};
+
 A.ak=v=>{ak=v;PG.abs.up()};A.aq=v=>{aq=v.toLowerCase();PG.abs.up()};
 A.sq=v=>{sq=v.toLowerCase();PG.siswa.up()};let sq='';
 const absList=()=>{const{m,a}=sum(),L=a.filter(s=>(!ak||s.kelasId==ak)&&(!aq||s.nama.toLowerCase().includes(aq)||String(s.nisn).includes(aq))).sort(byN);
  return tbl(['Nama','Kelas','Status','Masuk','Pulang',''],L.map(s=>{const r=m[s.id];return[H(s.nama),kn(s.kelasId),r?badge(st(r)):'<small>Belum tercatat</small>',r?fmt(r.jamMasuk):'-',r?fmt(r.jamPulang):'-',`<button class="btn s" onclick="A.ab(${J(s.id)})">Izin / Koreksi</button> <button class="btn s" onclick="A.rw(${J(s.id)})">Riwayat</button>`]}))};
 const siswaList=()=>{const L=S.siswa.filter(x=>(!fk||x.kelasId==fk)&&(fs==''?!isLulus(x):fs=='1'?x.aktif!==false:fs=='0'?x.aktif===false&&!isLulus(x):isLulus(x))&&(!sq||x.nama.toLowerCase().includes(sq)||String(x.nisn).includes(sq))).sort(byN);
  return`<small>${L.length} siswa</small>`+tbl(['NISN','Nama','Kelas','Status',''],L.map(s=>[H(s.nisn),H(s.nama),kn(s.kelasId),sLbl(s),`<button class="btn s" onclick="A.rw(${J(s.id)})">Riwayat</button> <button class="btn s" onclick="A.qs(${J(s.id)})">QR</button> `+act('siswa',s.id)]))};
+// ===== Kabari orang tua (WhatsApp klik-untuk-chat) =====
+let waQ='',waSt='';
+const waClosed=()=>S.waLog.some(x=>x.id=='T_'+curDay)||tm(new Date())>=mins(cfg().alpaJam||'10:00');
+function waRows(){const{a,m}=sum(),off=offDay(curDay),cl=waClosed(),R=[];
+ a.forEach(s=>{const r=m[s.id],k=r?st(r):'';let t='';if(k=='izin'||k=='sakit')t=k;else if(!r&&cl&&!off)t='alpa';if(!t)return;R.push({s,t,r,log:S.waLog.find(x=>x.id==curDay+'_'+s.id)})});
+ return R.filter(x=>(!waSt||x.t==waSt)&&(!waQ||x.s.nama.toLowerCase().includes(waQ))).sort((x,y)=>byN(x.s,y.s))}
+const waMsg=(x)=>{const c=cfg(),tpl=c[x.t=='izin'?'waIzin':x.t=='sakit'?'waSakit':'waAlpa'],tg=new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'}),kt=x.r?.keterangan?'Keterangan: '+x.r.keterangan+'. ':'';
+ return String(tpl).replace(/\{nama\}/g,x.s.nama).replace(/\{kelas\}/g,kn(x.s.kelasId)).replace(/\{tanggal\}/g,tg).replace(/\{sekolah\}/g,c.namaSekolah).replace(/\{keterangan\}/g,kt)};
+A.wq=v=>{waQ=v.toLowerCase();PG.wa.up()};A.wf=v=>{waSt=v;PG.wa.up()};
+A.wk=async id=>{const x=waRows().find(y=>y.s.id==id);if(!x)return;const hp=hpNorm(x.s.hpOrtu);if(!hp)return toast('Nomor WhatsApp orang tua belum diisi/valid. Isi di menu Siswa.');
+ window.open('https://wa.me/'+hp+'?text='+encodeURIComponent(waMsg(x)),'_blank','noopener');
+ try{await DB.set('waLog',curDay+'_'+id,{tanggal:curDay,siswaId:id,status:x.t,oleh:me.nama,waktu:DB.ts()})}catch(e){toast('Tercatat gagal: '+errMsg(e))}};
+A.wt=()=>ask('Tutup absensi hari ini?','Semua siswa yang belum tercatat hari ini akan dianggap alpa dan muncul di daftar ini, tanpa menunggu jam batas alpa.','Tutup',async()=>{await DB.set('waLog','T_'+curDay,{tanggal:curDay,tutup:true,oleh:me.nama,waktu:DB.ts()})});
+const waList=()=>{const L=waRows();return tbl(['Nama','Kelas','Status','No. WhatsApp','Dikabari',''],L.map(x=>{const hp=hpNorm(x.s.hpOrtu);return[H(x.s.nama),kn(x.s.kelasId),badge(x.t),hp?'+'+hp:'<span class="bdg" style="background:#FEF3C7;color:#92400E">Belum diisi</span>',x.log?`<span class="bdg" style="background:#DCFCE7;color:#166534">✓ ${H(x.log.oleh||'')}</span>`:'<small>Belum</small>',`<button class="btn s ${x.log?'':'p'}" ${hp?'':'disabled'} onclick="A.wk(${J(x.s.id)})">${ico('wa')} ${x.log?'Kirim ulang':'Kirim WA'}</button>`]}))};
+
 const PG={
- dash:{t:'Dashboard',live:1,r(){const{c,bel,tot,a,m}=sum(),off=offDay(curDay);
-  const kl=S.kelas.map(k=>{const ss=a.filter(s=>s.kelasId==k.id),n=ss.length,tc=ss.filter(s=>m[s.id]).length,pr=ss.filter(s=>m[s.id]&&PR.includes(st(m[s.id]))).length;return{k,n,tc,pr}}).sort((x,y)=>(x.n?x.tc/x.n:1)-(y.n?y.tc/y.n:1));
+ dash:{t:'Dashboard',live:1,r(){const{c,bel,tot,a,m}=sum(),off=offDay(curDay),rec=tot-bel.length,pc=n=>tot?Math.round(n/tot*100):0;
+  const kl=S.kelas.map(k=>{const ss=a.filter(s=>s.kelasId==k.id),n=ss.length,tc=ss.filter(s=>m[s.id]).length,pr=ss.filter(s=>m[s.id]&&PR.includes(st(m[s.id]))).length;return{k,n,tc,pr}}).sort((x,y)=>(x.n?x.pr/x.n:1)-(y.n?y.pr/y.n:1));
   const qa=[['scan','Scanner','scan'],['man','Absen Manual','edit'],['abs','Absensi','list'],me.role=='admin'?['rekap','Rekap','chart']:['kal','Kalender','cal']];
-  return`<div class="hero"><div class="row" style="margin:0;justify-content:space-between;align-items:flex-start"><div><div style="opacity:.9;font-weight:600">Halo, ${H(me.nama)}</div><h2>${H(cfg().namaSekolah)}</h2><div>${new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} · TA ${H(cfg().tahunAjaran)}</div></div><button class="btn nf" onclick="A.full()">Tampilan penuh (F)</button></div>${off?`<div class="pv" style="margin-top:12px">🗓 Hari ini libur: ${H(off.n)}. Absensi tidak dicatat dan tidak dihitung alpa.</div>`:''}</div>
+  const K=[['k1','Hadir',hdr(c),'cap',`${pc(hdr(c))}% dari ${tot} siswa`],['k2','Terlambat',c.terlambat,'cal',`${pc(c.terlambat)}% dari siswa`],['k3','Izin / Sakit',c.izin+c.sakit,'edit',`${c.izin} izin · ${c.sakit} sakit`],['k4','Belum hadir / alpa',bel.length,'list',`${pc(bel.length)}% belum tercatat`]];
+  const ln=new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  return`<div class="dh"><div><small>Halo, ${H(me.nama)} 👋</small><h2>Dashboard Kehadiran</h2><p>${H(cfg().namaSekolah)} · ${ln} · TA ${H(cfg().tahunAjaran)}</p></div><button class="btn nf" onclick="A.full()">Tampilan penuh (F)</button></div>
+  ${off?`<div class="pv" style="margin-bottom:14px">🗓 Hari ini libur: ${H(off.n)}. Absensi tidak dicatat dan tidak dihitung alpa.</div>`:''}
   <div class="qa">${qa.map(([p,l,i])=>`<button onclick="A.go('${p}')"><span class="ti">${ico(i)}</span>${l}</button>`).join('')}</div>
-  <div class="grid">${Object.keys(ST).filter(k=>k!='alpa').map(k=>`<div class="card"><small>${ST[k][0]}</small><b class="big" style="color:${ST[k][1]}">${c[k]}</b></div>`).join('')}<div class="card"><small>Belum hadir / alpa</small><b class="big" style="color:${ST.alpa[1]}">${bel.length}</b></div></div>
-  <div class="two"><div><div class="card">${ring(c,tot)}<div class="leg">${['hadir','terlambat','dispensasi','izin','sakit'].map(k=>`<span><span style="color:${ST[k][1]}">●</span> ${ST[k][0]} ${c[k]}</span>`).join('')}</div><p class="empty" style="padding:4px 0 12px">${hdr(c)} dari ${tot} siswa aktif hadir<br><small>Persentase = hadir + terlambat + dispensasi</small></p></div>
-   <div class="card"><h3>Progres per kelas</h3><small>Bar gelap = hadir, bar terang = sudah tercatat (termasuk izin/sakit)</small>${kl.map(x=>`<div style="margin-top:8px"><small>${H(x.k.nama)} · ${x.tc}/${x.n} tercatat · ${x.n?Math.round(x.pr/x.n*100):0}% hadir</small><div class="bar"><i class="l" style="width:${x.n?Math.round(x.tc/x.n*100):0}%"></i><i style="width:${x.n?Math.round(x.pr/x.n*100):0}%"></i></div></div>`).join('')||'<p class="empty">Belum ada kelas</p>'}</div></div>
-  <div><div class="card"><h3>Scan terbaru</h3>${S.absensi.filter(r=>r.jamMasuk).sort((x,y)=>(D(y.jamMasuk)||new Date())-(D(x.jamMasuk)||new Date())).slice(0,6).map(r=>`<div class="fi"><span>${H(S.siswa.find(x=>x.id==r.siswaId)?.nama||r.siswaId)}<br><small>${kn(r.kelasId)}</small></span><span>${fmt(r.jamMasuk)} ${badge(st(r))}</span></div>`).join('')||'<p class="empty">Belum ada scan hari ini</p>'}
-  <h3 style="margin-top:16px">Belum hadir</h3>${bel.slice(0,10).map(s=>`<div class="fi"><span>${H(s.nama)}</span><small>${kn(s.kelasId)}</small></div>`).join('')||'<p class="empty">Semua siswa sudah tercatat</p>'}${bel.length>10?`<small>+${bel.length-10} siswa lainnya</small>`:''}</div></div></div>`}},
+  <div class="kpi">${K.map(([k,l,v,i,d])=>`<div class="card kc ${k}"><span class="ki">${ico(i)}</span><small>${l}</small><b>${v}</b><span class="dl">${d}</span></div>`).join('')}</div>
+  <div class="d3"><div class="card"><div class="ch"><span class="ci">${ico('school')}</span><h3>Progres per kelas</h3></div><small style="color:var(--m)">Bar gelap = hadir, bar terang = sudah tercatat. Kelas terendah di atas.</small><div style="max-height:330px;overflow:auto">${kl.map(x=>`<div class="pr"><div><small><span>${H(x.k.nama)}</span><b>${x.n?Math.round(x.pr/x.n*100):0}%</b></small><div class="bar"><i class="l" style="width:${x.n?Math.round(x.tc/x.n*100):0}%"></i><i style="width:${x.n?Math.round(x.pr/x.n*100):0}%"></i></div><small>${x.tc}/${x.n} tercatat</small></div></div>`).join('')||'<p class="empty">Belum ada kelas</p>'}</div></div><div class="card"><div class="ch"><h3>Scan terbaru</h3></div>${S.absensi.filter(r=>r.jamMasuk).sort((x,y)=>(D(y.jamMasuk)||new Date())-(D(x.jamMasuk)||new Date())).slice(0,6).map(r=>`<div class="fi"><span>${H(S.siswa.find(x=>x.id==r.siswaId)?.nama||r.siswaId)}<br><small>${kn(r.kelasId)}</small></span><span>${fmt(r.jamMasuk)} ${badge(st(r))}</span></div>`).join('')||'<p class="empty">Belum ada scan hari ini</p>'}</div><div class="card"><div class="ch"><h3>Belum hadir</h3></div>${bel.slice(0,10).map(s=>`<div class="fi"><span>${H(s.nama)}</span><small>${kn(s.kelasId)}</small></div>`).join('')||'<p class="empty">Semua siswa sudah tercatat</p>'}${bel.length>10?`<small>+${bel.length-10} siswa lainnya</small>`:''}</div></div>
+  <div class="d2"><div class="card"><div class="ch"><span class="ci">${ico('chart')}</span><h3>Tren kehadiran</h3><select onchange="A.tr(this.value)" aria-label="Rentang tren">${sel([['7','7 hari'],['14','14 hari'],['30','30 hari']],String(TR))}</select></div><div id="dtr" class="trend">${trendHtml()}</div></div>
+   <div class="card"><div class="ch"><span class="ci">${ico('users')}</span><h3>Komposisi hari ini</h3></div><div class="dnw">${donut(c,tot,bel.length)}<div class="dlg">${DNK.map(k=>{const v=k=='alpa'?bel.length:c[k];return`<div><i style="background:${ST[k][1]}"></i><span>${DNL(k)}</span><b>${v}</b><em>${pc(v)}%</em></div>`}).join('')}</div></div></div></div>
+  <div class="d2 r fw"><div class="card"><div class="ch"><span class="ci">${ico('chart')}</span><h3>Corong kehadiran</h3></div>${funnel(tot,rec,hdr(c),c.hadir)}</div></div>`},
+  after(){if(!DTl&&(!DT||Date.now()-DT.at>6e5)){DTl=1;loadTrend().finally(()=>DTl=0)}}},
+ wa:{t:'Kabari Orang Tua',live:1,up(){const e=$('#wl');if(e)e.innerHTML=waList()},r(){const off=offDay(curDay),cl=waClosed(),tut=S.waLog.some(x=>x.id=='T_'+curDay);
+  return`<div class="card"><div class="ch"><span class="ci">${ico('wa')}</span><h3>Kabari orang tua siswa izin, sakit, dan alpa</h3></div>
+  <p class="chip" style="font-weight:600">${off?'Hari ini libur, tidak ada siswa alpa.':cl?(tut?'Absensi ditutup manual.':'Batas alpa ('+H(cfg().alpaJam||'10:00')+') sudah lewat.')+' Siswa belum tercatat dihitung alpa.':'Siswa belum tercatat belum dihitung alpa sebelum jam '+H(cfg().alpaJam||'10:00')+' atau sampai absensi ditutup.'}</p>
+  <div class="pv" style="margin-bottom:10px">Pesan dikirim dari WhatsApp yang sedang login di perangkat ini. Tombol hanya membuka WhatsApp dengan pesan siap kirim; Anda tetap menekan kirim sendiri.</div>
+  <div class="row"><select onchange="A.wf(this.value)" aria-label="Status">${sel([['','Semua status'],['izin','Izin'],['sakit','Sakit'],['alpa','Alpa']],waSt)}</select><input placeholder="Cari nama" value="${H(waQ)}" oninput="A.wq(this.value)">${!cl&&!off?'<button class="btn" onclick="A.wt()">Tutup absensi hari ini</button>':''}</div>
+  <div id="wl">${waList()}</div></div>`}},
  scan:{t:'Layar Scanner',r(){return`<div class="sg"><div class="card"><div class="row" style="justify-content:space-between"><b>Tempelkan kartu pelajar ke kamera</b><button class="btn nf" onclick="A.full()">Tampilan penuh (F)</button></div><div id="fr"></div><div id="reader"></div><div class="row" style="margin-top:10px"><button class="btn s" id="cs" style="display:none" onclick="A.cs()">🔄 Ganti kamera</button><button class="btn s" onclick="A.rc()">↻ Muat ulang kamera</button><button class="btn s" onclick="A.pq()">🖼 Scan dari foto</button><button class="btn s" id="dvb" onclick="A.dv()">🔌 Alat scanner</button>${IS_PREVIEW?'<button class="btn s" onclick="A.fo()">Simulasi offline</button>':''}<input id="qf" type="file" accept="image/*" hidden onchange="A.qf(this.files[0]);this.value=''"></div><div id="qrtmp" hidden></div><div id="gps" class="chip"></div><div id="qn" class="chip" style="font-weight:600"></div><input id="mi" placeholder="Kolom alat scanner / ketik NISN lalu Enter" onkeydown="if(event.key=='Enter'){A.sc(this.value);this.value=''}"><div id="res" class="res"></div></div><div class="card"><h3>Sudah absen: <span id="cnt"></span></h3><div id="feed"></div></div></div>`},after(){updScan();qUI();if(devMode){devUI();if(gpsOn())gpsCheck()}else startCam()}},
  abs:{t:'Absensi Hari Ini',live:1,up(){const e=$('#lst');if(e)e.innerHTML=absList()},r(){return`<div class="card"><div class="row"><select onchange="A.ak(this.value)" aria-label="Kelas"><option value="">Semua kelas</option>${sel(kOpts(),ak)}</select><input id="aqi" placeholder="Cari nama / NISN" value="${H(aq)}" oninput="A.aq(this.value)"></div><div id="lst">${absList()}</div></div>`}},
  siswa:{t:'Data Siswa',live:1,up(){const e=$('#lst');if(e)e.innerHTML=siswaList()},r(){return`<div class="card"><div class="row"><select onchange="A.fk(this.value)" aria-label="Kelas"><option value="">Semua kelas</option>${sel(kOpts(),fk)}</select><select onchange="A.fs(this.value)" aria-label="Status">${sel([['','Aktif & nonaktif'],['1','Aktif'],['0','Nonaktif'],['lulus','Lulus']],fs)}</select><input id="sqi" placeholder="Cari nama / NISN" value="${H(sq)}" oninput="A.sq(this.value)"></div><div class="row"><button class="btn p" onclick="A.ad('siswa')">+ Tambah</button><button class="btn" onclick="A.nk('')">Kenaikan kelas</button>${fk?`<button class="btn" onclick="A.nk(${J(fk)})">Naikkan kelas ini</button><button class="btn d" onclick="A.dk(${J(fk)})">Hapus semua siswa kelas ini</button>`:''}<button class="btn" onclick="A.pick()">Impor Excel/CSV</button><input id="fi" type="file" hidden accept=".xlsx,.xls,.csv" onchange="A.imp(this.files[0]);this.value=''"><button class="btn" onclick="A.tpl()">Template</button><button class="btn" onclick="A.exm()">Export Excel</button><button class="btn" onclick="A.qm()">Generate QR</button></div><div id="lst">${siswaList()}</div></div>`}},
- users:{t:'Data Guru',live:1,r(){return`<div class="card"><div class="row"><button class="btn p" onclick="A.ad('users')">+ Tambah</button><button class="btn" onclick="$('#fig').click()">Impor Excel/CSV</button><input id="fig" type="file" hidden accept=".xlsx,.xls,.csv" onchange="A.impg(this.files[0]);this.value=''"><button class="btn" onclick="A.tplg()">Template guru</button></div>${tbl(['NIP','Nama','Peran','Status',''],S.users.map(u=>[H(u.username||u.id),H(u.nama),u.role=='piket'?'Guru Piket':'Wali Kelas',u.aktif===false?'Nonaktif':'Aktif',act('users',u.id)]))}</div>`}},
+ users:{t:'Data Guru',live:1,r(){return`<div class="card"><div class="row"><button class="btn p" onclick="A.ad('users')">+ Tambah</button><button class="btn" onclick="$('#fig').click()">Impor Excel/CSV</button><input id="fig" type="file" hidden accept=".xlsx,.xls,.csv" onchange="A.impg(this.files[0]);this.value=''"><button class="btn" onclick="A.tplg()">Template guru</button></div>${tbl(['NIP','Nama','Email','Peran','Status',''],S.users.map(u=>[H(u.nip||u.username||u.id),H(u.nama),u.email?H(u.email):'<span class="bdg" style="background:#FEF3C7;color:#92400E">Perlu didaftarkan ulang</span>',u.role=='piket'?'Guru Piket':'Wali Kelas',u.aktif===false?'Nonaktif':'Aktif',`<button class="btn s" onclick="A.rst(${J(u.id)})">Reset password</button> `+act('users',u.id)]))}</div>`}},
  kelas:{t:'Kelas & Jurusan',live:1,r(){return`<div class="card"><div class="row"><button class="btn p" onclick="A.ad('kelas')">+ Tambah</button><button class="btn" onclick="A.nk('')">Kenaikan kelas (semua)</button>${cfg().naikId?`<button class="btn" onclick="A.nb()">Batalkan kenaikan terakhir</button>`:''}</div>${tbl(['Kelas','Tingkat','Wali kelas','Siswa',''],S.kelas.slice().sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true})).map(k=>{const lu=S.siswa.filter(s=>s.kelasId==k.id&&isLulus(s)).length;return[H(k.nama),H(k.tingkat),H(S.users.find(u=>u.id==k.waliKelasId)?.nama||'-'),S.siswa.filter(s=>s.kelasId==k.id&&!isLulus(s)).length+(lu?` <small>(+${lu} lulus)</small>`:''),`<button class="btn s" onclick="A.nk(${J(k.id)})">Naik kelas</button> <button class="btn s d" onclick="A.dk(${J(k.id)})">Hapus siswa</button> `+act('kelas',k.id)]}))}</div>`}},
  rekap:{t:'Rekap Kehadiran',up(){if(ready()&&!RKA&&$('#rt'))draw()},r(){const ks=me.role=='walikelas'?S.kelas.filter(k=>String(k.waliKelasId)==me.id):S.kelas.slice().sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true}));
   return`<div class="card"><div class="row"><input type="month" id="bln" value="${curDay.slice(0,7)}" aria-label="Bulan"><select id="rk" aria-label="Kelas">${me.role=='admin'?'<option value="">Semua kelas (ringkasan)</option>':''}${sel(ks.map(k=>[k.id,k.nama]),'')}</select><button class="btn p" onclick="A.rk()">Tampilkan</button><button class="btn" onclick="A.rx()">Export Excel</button><button class="btn" onclick="A.rp()">Cetak / PDF</button>${me.role=='admin'?'<button class="btn" onclick="A.rxa()">Export semua kelas</button>':''}</div><div id="rt"><p class="empty">Memuat data…</p></div></div>`},
@@ -835,7 +990,7 @@ const PG={
   <label>Tema warna</label><input type="hidden" id="s_tema" value="${H(c.tema)}"><div class="sw">${Object.entries(THEMES).map(([k,t])=>`<button type="button" data-k="${k}" class="${k==c.tema?'on':''}" title="${t[0]}" aria-label="Tema ${t[0]}" style="background:linear-gradient(135deg,${t[1]},${t[2]},${t[3]})" onclick="A.th('${k}')"></button>`).join('')}</div>
   <div class="sec">Operasional</div>${FOP.map(f=>inp('s_',f,c[f[0]])).join('')}
   <div class="row" style="margin-top:18px"><button class="btn" onclick="A.gps()">Gunakan lokasi saya</button><button class="btn p" onclick="A.sset()">Simpan pengaturan</button></div></div>`}},
- akun:{t:'Akun Saya',r(){return`<div class="card" style="max-width:460px"><h3>Ganti password</h3><p style="color:var(--m);margin:6px 0">Masuk sebagai <b>${H(me.nama)}</b> (NIP ${H(me.id)}).</p><label for="pw0">Password lama</label><input type="password" id="pw0" autocomplete="current-password"><label for="pw1">Password baru (min. 6 karakter)</label><input type="password" id="pw1" autocomplete="new-password"><label for="pw2">Ulangi password baru</label><input type="password" id="pw2" autocomplete="new-password" onkeydown="if(event.key=='Enter')A.pw()"><div class="row" style="margin-top:16px"><button class="btn p" id="pwb" onclick="A.pw()">Simpan password</button></div></div>`}}};
+ akun:{t:'Akun Saya',r(){return`<div class="card" style="max-width:460px"><h3>Ganti password</h3><p style="color:var(--m);margin:6px 0">Masuk sebagai <b>${H(me.nama)}</b> (NIP ${H(me.nip||'')}${me.email?', '+H(me.email):''}).</p><label for="pw0">Password lama</label><input type="password" id="pw0" autocomplete="current-password"><label for="pw1">Password baru (min. 6 karakter)</label><input type="password" id="pw1" autocomplete="new-password"><label for="pw2">Ulangi password baru</label><input type="password" id="pw2" autocomplete="new-password" onkeydown="if(event.key=='Enter')A.pw()"><div class="row" style="margin-top:16px"><button class="btn p" id="pwb" onclick="A.pw()">Simpan password</button></div></div>`}}};
 window.$=$;
 
 // ===== Ikon mata untuk semua kolom password =====
@@ -844,15 +999,21 @@ function eyeify(){document.querySelectorAll('input[type=password]:not([data-eye]
  b.onclick=()=>{const s=i.type=='password';i.type=s?'text':'password';b.innerHTML=ico(s?'eyeoff':'eye');b.setAttribute('aria-label',s?'Sembunyikan password':'Tampilkan password');i.focus()};w.append(b)})}
 new MutationObserver(eyeify).observe(document.body,{childList:true,subtree:true});eyeify();
 
+// ===== Pulihkan sesi login Firebase (admin atau guru) =====
+async function resolveSession(u){try{if(await isAdm()){me={role:'admin',nama:u.email,id:'admin'};return start()}
+ const em=String(u.email||'').toLowerCase(),r=await DB.get('users',em);
+ if(r&&r.aktif!==false&&['piket','walikelas'].includes(r.role)){me={id:r.id,nip:r.nip,role:r.role,nama:r.nama,email:r.email||em};return start()}}catch{}
+ try{await DB.fresh()}catch{}}
+
 // ===== Mulai =====
 (async()=>{
  if(IS_PREVIEW){DB=memDB();await seed();S.settings=await DB.q('settings');rebuildHol();applyBrand();
-  $('#lpv').innerHTML='<div class="pv"><b>MODE PREVIEW</b> (data di memori)<br>Admin: admin@sakti.sch / admin123<br>Piket: 1980 / piket123<br>Wali kelas: 1981 / wali123<br>Simulasi scan: ketik 1001 atau 1002 di kolom cadangan.</div>'+frameNote()}
+  $('#lpv').innerHTML='<div class="pv"><b>MODE PREVIEW</b> (data di memori)<br>Admin: admin@sakti.sch / admin123<br>Piket: 1980 / piket123<br>Wali kelas: 1981 / wali123<br>Guru masuk dengan NIP. Akun guru baru yang dibuat di preview memakai password sementara preview123.<br>Simulasi scan: ketik 1001 atau 1002 di kolom scanner.</div>'+frameNote()}
  else{try{DB=await fbDB()}catch(e){rebuildHol();applyBrand();err('Firebase gagal dimuat. Periksa firebaseConfig dan koneksi.');return}
   let u=null;try{u=await DB.boot()}catch{}
   try{const s=await DB.get('settings','school');if(s)S.settings=[s]}catch{}
   rebuildHol();applyBrand();$('#lpv').innerHTML=frameNote()+(DB.anonErr=='auth/operation-not-allowed'?'<div class="pv">Aktifkan metode "Anonymous" di Firebase Authentication agar aplikasi dapat membaca data.</div>':'');
-  if(u){me={role:'admin',nama:u.email,id:'admin'};start()}}
+  if(u)await resolveSession(u)}
 })();
 </script>
 </body>
